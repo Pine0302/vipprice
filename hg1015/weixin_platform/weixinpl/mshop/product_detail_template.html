@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?= $name; ?></title>
+    <!-- 模板 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta content="no" name="apple-touch-fullscreen">
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name=apple-mobile-web-app-capable content=yes>
+    <meta name=apple-mobile-web-app-status-bar-style content=black>
+    <meta http-equiv="pragma" content="nocache">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+
+    <link type="text/css" rel="stylesheet" href="./assets/css/amazeui.min.css"/>
+    <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/weixinpl/common/js/layer/V2_1/layer.js"></script>
+    <?php if ($is_openOrderMessage == 1) { ?>
+        <script type="text/javascript" src="./js/order_message.js"></script>
+    <?php } ?>
+
+    <!-- 模板 -->
+    <!-- 页联系style-->
+    <link type="text/css" rel="stylesheet" href="./css/goods/global.css"/>
+    <link type="text/css" rel="stylesheet" href="./css/goods/product_detail.css"/>
+    <link type="text/css" rel="stylesheet" href="css/order_css/global.css"/>
+    <link type="text/css" rel="stylesheet" href="./css/css_<?= $skin ?>.css"/>
+    <link type="text/css" rel="stylesheet" href="./css/product_coupon.css"/>
+    <link href="./css/goods/mobiscroll/mobiscroll.custom-2.17.1.min.css" rel="stylesheet" type="text/css">
+    <!-- 属性图预览 -->
+    <link type="text/css" rel="stylesheet" href="./css/ImgPreview.css"/>
+    <link type="text/css" rel="stylesheet" href="./css/swiper.min.css"/>
+
+    <link type="text/css" rel="stylesheet" href="./css/floatingwindow.css"/>
+    <!-- 页联系style-->
+    <style type="text/css">
+        <?php
+        if($d_link){
+            echo '.am-slider-a1{-webkit-box-shadow: none;box-shadow: none;}';
+        }
+        ?>
+        .hide{display:none;}
+        .button{
+            -webkit-transition-duration:0.4s; /* Safari */
+            transition-duration:0.4s;
+        }
+        #button4.item2-panel-button{
+            font-size:14px;
+            height:40px;
+            width:90%;
+            text-align:center;
+            background-color:#736b6b;
+            padding:0px;
+            border-color:#736b6b;
+        }
+        #button3.item2-panel-button{
+            font-size:14px;
+            height:40px;
+            width:90%;
+            text-align:center;
+            background-color:#736b6b;
+            padding:0px;
+            border-color:#736b6b;
+        }
+        .buttonclick:hover{
+            box-shadow:0 0 5px 0 rgba(0, 0, 0, 0.24);
+        }
+        .am-shui{height:18px; background:#fff;border:1px solid #ff7109; color:#ff7109;border-radius:2px;font-size:13px;padding:0;}
+        .test5{
+            display:inline-block;
+            height:0;
+            width:20px;
+            color:#fff;
+            line-height:0;
+            border-color:#ff7109 #fff transparent transparent;
+            border-style:solid solid dashed dashed;
+            border-width:16px 4px 0 0;
+        }
+        .test5 span{display:block;margin-top:-7px;color:#fff;font-weight:bold;}
+        .bi{
+            background:#F98C3E;
+            margin-right:4px;
+        }
+        .sanjiao{display:block;width:0;height:0;border-width:0 5px 5px;border-style:solid;border-color:transparent #fd7c24 transparent transparent;position:absolute;top:0px;left:-10px;}
+        .jianshu{display:inline-block;background:#fd7c24;color:#fff;font-size:12px; letter-spacing:1px;border-radius:0 2px 2px 0;position:relative;margin-left:1%;padding-left:3px;}
+        .coupon_img{
+            width:50px;
+            margin-bottom:6px;
+        }
+        .shangpin-addprice .span{
+            line-height:0px; /*这里不要再设置其他值了。我改过三万遍了。*/
+        }
+        .det{width:100%;padding:10px 2.5%;background-color:#fff;border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;font-size:15px;position:relative;}
+        .det img{max-width:100%;}
+        .det .exp{font-size:17px;color:#2a2a2a;}
+        .det .expNum{color:#fe842f;}
+        .det .expMore{color:#888888;float:right;margin-top:2px;margin-right:5px;}
+        .det .icon{width:20px;height:20px; background-color:#cccccc;color:#fff;border-radius:50%;transform:rotate(180deg);-webkit-transform:rotate(180deg);text-align:center;display:inline-block;margin-left:10px;}
+        .det .icon span{line-height:20px;height:20px;}
+        .det .detBtn{float:right;margin-top:3px;width:20px;}
+        .det .detBtn2{float:right;margin-top:3px;height:20px;}
+        .det .detBottom{color:#666666;width:100%;margin-top:15px;font-size:0;}
+        .detBottom .time{margin-bottom:10px;font-size:12px;}
+        .detBottom .detCell{ /*width: 25%;text-align: center;*/position:relative;display:inline-block;font-size:8px;}
+        .detCell .num{background-color:#e6e6e6;color:#666666;width:25px;height:25px;line-height:25px; text-align:center;margin:auto;border-radius:50%;margin-bottom:5px;}
+        .detCell .txtExp{text-align:left;padding:5px 0;background-color:#f5f5f5;width:90%;margin:auto;margin-top:5px;}
+        .detCell .img{position:absolute;top:10px;right:-10px;width:30px;}
+        .collageTag{
+            border-color:#FC8B19 !important;
+            color:#FC8B19 !important;margin-right:2px;
+        }
+        .detCell3{ /*background-color: #f7f7f7;*/margin-top:15px;padding:10px 5px;}
+        .detCell3 .headImg2{width:60px;height:60px;border-radius:50%;display:inline-block;vertical-align:middle;}
+        .detCell3 .box1{display:inline-block;vertical-align:middle;margin-left:5px;width:49%;color:#2a2a2a;font-size:14px;}
+        .detCell3 .box2{display:inline-block;vertical-align:middle;color:#fff;float:right;}
+        .box1 p{line-height:22px;margin:0;}
+        .box1 .line1{font-size:17px;width:100%;overflow:hidden;text-overflow:ellipsis; white-space:nowrap;}
+        .box1 .line2{color:#707070;}
+        .box1 .line3 span{color:#ff8430;margin-left:5px;}
+        .box2 p{padding:3px 12px;margin:0;}
+        .box2 .top{background-color:#666666;border-top-left-radius:5px;border-top-right-radius:5px;}
+        .box2 .bottom{background-color:#fe842f;border-bottom-left-radius:5px;border-bottom-right-radius:5px;color:#fff;}
+        .box2 .bottom img{height:15px;position:relative;top:-2px;left:5px;}
+        #singleBuy, #collageBuy{width:47%;border:none;}
+        #singleBuy{opacity:0.7;}
+        #singleBuy span, #collageBuy span{display:block;font-size:14px;color:#fff;}
+        #xufei{font-size:1.2rem;color:#5f666b;margin-left:5px;}
+        .sellcontent{
+            width:100%;
+            background-color:#ffffff;
+            border-top-left-radius:3px;
+            border-top-right-radius:3px;
+            padding:10px 24px;
+            box-sizing:border-box;
+        }
+        .hide{display:none;}
+        .count{float:left;}
+        .countDet{color:#cc4d47;font-size:13px;vertical-align:middle;float:left;line-height:25px;}
+        .countld{width:10px;float:left;margin-right:2px;margin-top:4px;}
+        .am-modal-dialog{border-radius:5px;border:none;max-height:calc(100% - 50px);}
+        .am-modal-dialog img{width:100%;max-height:100%;border-radius:5px;}
+        .code-box{height:calc(90% - 50px);width:70%;margin-left:0;left:15%;top:5%;}
+        /*.am-modal{top:10%}
+        .am-modal-dialog img{
+            width:100%;
+            height:100%;
+            border-radius:5px;
+        }*/
+        .big_pro_name span{
+            line-height:33px;
+        }
+        .wx_loading_icon{top:200%;}
+        .buttom-none{border-bottom:0;}
+        .shangpin-neardate{background-color:#fff;padding:0 3px 10px 3px;box-sizing:border-box;border-bottom:solid 1px #eee;position:relative;width:100%;}
+        .shangpin-neardate p{margin:0;}
+        .shangpin-neardate ul{font-size:0;vertical-align:middle;margin:0;position:relative;margin-right:40px;}
+        .shangpin-neardate ul li{display:inline-block;width:25%;box-sizing:border-box;padding:0 5px;text-align:center;}
+        .shangpin-neardate ul li.active a{background-color:#e5d1b1;border-color:#cdb99b;}
+        .shangpin-neardate ul li a{display:block;border:solid 1px #d1d1d1;border-radius:2px;padding:5px;outline:none;}
+        .shangpin-neardate .time{font-size:1.2rem;color:#333;}
+        .shangpin-neardate .price{font-size:1.2rem;color:#333;}
+        .shangpin-neardate .allDate{width:40px;font-size:1.1rem;color:#fd7c24;text-align:center;position:absolute;right:3px;top:0;height:100%;vertical-align:middle;display:inline-block;padding:5px 0;}
+        .getmovetime{position:absolute;height:100%;top:0;z-index:5;opacity:0;}
+        .shangpin-neardate .getmovetime{width:40px;right:10px;}
+        .buttom-none{position:relative;}
+        .buttom-none .getmovetime{width:100%;left:0;}
+        .showmovetime, .showmovelist{padding-right:10px;font-size:1rem;}
+        .Timelist-bg{position:fixed;width:100%;height:100%;background-color:rgba(0, 0, 0, .7);top:0;left:0;z-index:998;}
+        .Timelist{position:fixed;width:100%;bottom:0;left:0;background-color:#fff;z-index:999;border-bottom:solid 1px #ddd;}
+        .Timelist button{border:0;}
+        .Time-title{text-align:center;padding:13px 0;font-size:1.6rem;color:#333;border-bottom:solid 1px #ddd;}
+        .Time-content{padding:10px;max-height:180px;overflow-y:scroll;}
+        .Time-content ul{text-align:center;padding:0;margin:0;font-size:1.4rem;}
+        .Time-content ul li{display:inline-block;min-width:70%;padding:5px 10px;border:solid 1px #eee;border-radius:10px;margin:5px 0;}
+        .Time-button{overflow:hidden;}
+        .Time-button > button{width:50%;box-sizing:border-box;border-top:solid 1px #ddd;float:left;font-size:1.6rem;color:#333;padding:15px 0;background-color:#fff;}
+        .Time-button > button:first-child{border-right:solid 1px #ddd;}
+        .line-clamp-2{display:-webkit-box !important;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;}
+        .hidden{display:none}
+        .flex{display:flex;}
+        .shangpin-addprice.flex{justify-content:space-between;align-items:center;}
+        .message-floor{ z-index: 12000;}
+        /*3d素材*/
+        .shangpin-content-second iframe{
+            width: 100% !important;
+            height: 375px !important;
+            float: left;
+        }
+        .threed_show{
+            width: 50px!important;height: 50px!important;
+        }
+        /*3d素材*/
+        <?php
+        //卖模式
+        if($is_buy_sale_model && $is_promoters != 1 ){
+            //买98%，卖隐藏
+            echo '
+            .shangpin-footer .item2 .item2-panel:first-child{
+                width: 98%;
+            }
+            .shangpin-footer .item2 .item2-panel:last-child{
+                display: none;
+            }';
+        }
+        ?>
+        .shangpin-dialog .no-storenum.active{
+            background-image:none;
+            border:1px solid #eee;
+        }
+        .shangpin-dialog .no-storenum{
+            color: #ccc!important;
+        }
+        .yundian-product-num {
+            border: solid 1px #d3d3d3;color: #2a2a2a;text-align: center;display: flex;
+        }
+        .yundian-product-num .key-box{
+            width: 27px;height: 27px;line-height: 27px;font-size: 20px;font-weight:b:;old;color: #494949;text-align: center;
+        }
+        .yundian-product-num .key-input{
+            width: 37px;border: none;background-color: transparent;outline: none;border-left: solid 1px #d3d3d3;border-right: solid 1px #d3d3d3;text-align: center;font-size: 14px;
+        }
+
+        #joinCar, #buyDiv, #sellDiv{border-radius: 3px;}
+        #qrcode_div1{    top: 0;    left: 0;    width: 100%;    height: 100%;    background: rgba(0,0,0,0.0);}
+        .qrcode_div_bg{position: fixed;display: none; z-index: 10001;width: 100%;top: 50%;}
+        .qrcode_div_bg_w{position: relative;background: #fff;width: calc(100% - 60px);margin: 0 auto;box-sizing: border-box;top: 50%;margin-top:calc(-50% + 50px);padding: 30px 60px 10px;border-radius: 10px;}
+        #code_img1{width: 100%;overflow: hidden;}
+        #close_qr1{top: -85px;position: absolute;width: 40px;margin-left: -70px !important;left: 100%;} 
+        .refresh1{    position: relative;  width: 100%;height: 50px;line-height: 50px;color: #494949;margin-left: 0;text-align: center;}
+        #refresh_qr1 .refresh span{color: #494949;font-size: 15px;display: block;width: 100%;text-align: center;margin: 0;padding: 0;}
+        @media screen and (max-width:414px){
+         #joinCar, #buyDiv, #sellDiv{height: 45px;font-size: 15px;width: 85%;}
+        }
+        @media screen and (max-width:375px){
+             #joinCar, #buyDiv, #sellDiv{height: 40px;font-size: 15px;width: 90%;}
+              .qrcode_div_bg_w{padding: 30px 50px 10px;}
+        }
+        @media screen and (max-width:320px){
+             #joinCar, #buyDiv, #sellDiv{height: 35px;font-size: 14px;width: 95%;}
+             .shangpin-footer .item2-panel{margin-top: 14px;}
+             #refresh_qr1 .refresh span{font-size: 12px;}
+             .qrcode_div_bg_w{padding: 20px 40px 10px;}
+        }
+        .ewm-img img{width: 100%;}
+        .close_yunduan{    position: absolute;    top: -83px;    margin-left: -60px;    left: 100%;    width: 50px !important;    display: block !important;}
+        .tela{ width: 100%;height: 22px;display: inline-block;}
+        
+    </style>
+
+</head>
+<script>
+    function Hashtable() {
+        this._hash = {};
+        this._count = 0;
+        this.add = function (key, value) {
+            if (this._hash.hasOwnProperty(key)) return false;
+            else {
+                this._hash[key] = value;
+                this._count++;
+                return true;
+            }
+        }
+        this.remove = function (key) {
+            delete this._hash[key];
+            this._count--;
+        }
+        this.count = function () {
+            return this._count;
+        }
+        this.items = function (key) {
+            if (this.contains(key)) return this._hash[key];
+        }
+        this.contains = function (key) {
+            return this._hash.hasOwnProperty(key);
+        }
+        this.clear = function () {
+            this._hash = {};
+            this._count = 0;
+        }
+        this.getKeys = function ()
+        {
+           var keys = new Array();
+           for(var prop in this._hash)
+           {
+               keys.push(prop);
+           }
+           return keys;
+        }
+    }
+    ppriceHash = new Hashtable();
+    var propertyids = "<?= $propertyids; ?>";
+    <?php foreach($proids_data as $k => $v): ?>
+    ppriceHash.add('<?=$v["proids"]?>','<?=$v["info"]?>');
+    <?php endforeach;?>
+    selproHash = new Hashtable();
+</script>
+<body data-ctrl='true'>
+<div class="am-modal am-modal-confirm code-box" tabindex="-1" id="my-confirm">
+    <div class="am-modal-dialog" id='qr'>
+        <?php if (!$for_or && $over_time > 0){ ?>
+            <i class="wx_loading_icon"></i>
+        <?php }else{?>
+            <img src="/weixinpl/mshop/images/loading.gif" data-original="/weixinpl/common_shop/common/tc_erweima/tc_erweima.php?customer_id=<?php echo $customer_id ?>&user_id=<?php echo $user_id ?>" alt="">
+        <?php }?>
+    </div>
+    <div style="width: 100%; background: transparent none repeat scroll 0% 0%; height: 50px; line-height: 50px; text-align: center; float: left;">
+        <div style=" height: 50px;">
+            <span style="color:white;">长按图片保存二维码</span><img src="./images/refresh.png" style="width:18px;margin-left:10%" onclick="refresh2('reflesh');"/>
+        </div>
+    </div>
+</div>
+<!-- header部门-->
+<!-- <header data-am-widget="header" class="am-header am-header-default header">
+    <div class="am-header-left am-header-nav header-btn" onclick="goBack();">
+        <img class="am-header-icon-custom"  src="./images/center/nav_bar_back.png"/><span>返回</span>
+    </div>
+    <h1 class="header-title">商品详情</h1>
+    <div class="am-header-right am-header-nav">
+    </div>
+</header>
+<div class="topDiv" style="height:49px;"></div>  -->  <!-- 暂时屏蔽头部 -->
+<!-- header部门-->
+<div class="order_message hide" id="order_message" style="background-color: rgba(0,0,0,0.7);border-radius: 30px;height:30px;position:fixed;top: 52px;left: 10px;z-index: 10;">
+    <img style="width: 24px;height: 24px;border-radius: 50%;vertical-align: middle;margin:2px 3px;display: inline-block;" src="/weixinpl/mshop/images/headportrait.png"/>
+    <p style="color: #ffffff;font-size: 12px;display: inline-block;margin: 0;vertical-align: middle;padding-right: 7px;">
+        <span style="width:46px;display:inline-block;vertical-align:middle;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;margin-right: 5px;">瞪圆德惠</span>
+        <span style="display:inline-block;vertical-align:middle;">下了一笔订单</span>
+        <span style="display:inline-block;vertical-align:middle;margin-left: 5px;">5分钟前</span>
+    </p>
+</div>
+<div id="containerDiv">
+    <!--titlebar -->
+    <?php if($yundian == $pro_yundian_id && $yundian != -1){?>
+    <?php }else{ ?>
+    <div class="titlebar-container-div">
+        <!-- 个人信息, 语言/频视 商品二维码 titlebar-->
+        <div class="titlebar-container-menu-div-top titlebar-container-menu-primary fix">
+            <div class="titlebar-container-menu-primary-first-item titlebar-container-menu-item">
+                <a href="personal_center.php?customer_id=<?= $customer_id_en; ?>">
+                    <img class="am-header-icon-custom" src="./images/goods_image/20160051201.png">
+                    <span>个人中心</span>
+                </a>
+            </div>
+            <div class="titlebar-container-menu-primary-divider">
+                <img class="title-divider-img" src="./images/goods_image/line_nobg.png">
+            </div>
+            <div class="titlebar-container-menu-primary-second-item titlebar-container-menu-item">
+                <img class="am-header-icon-custom" src="./images/goods_image/20160051202.png">
+                <span>语音/视频</span>
+            </div>
+            <div class="titlebar-container-menu-primary-divider">
+                <img class="title-divider-img" src="./images/goods_image/line_nobg.png">
+            </div>
+            <? if ($barcodes == 1): ?>
+            <div onclick="show_personal_code();" class="titlebar-container-menu-primary-third-item  titlebar-container-menu-item">
+            <? else: ?>
+            <div onclick="showcode();" class="titlebar-container-menu-primary-third-item  titlebar-container-menu-item">
+            <? endif ?>
+                <img class="am-header-icon-custom" src="./images/goods_image/20160051203.png">
+                <span>二维码</span>
+            </div>
+
+
+                <!-- 个人信息, 语言/频视 商品二维码 titlebar-->
+
+                <!-- 4-tab title -->
+                <div class="titlebar-container-menu-div titlebar-container-menu-secondary fix hidden" id="titlebar-container-menu-secondary1">
+                    <div id="item1">
+                        <div class="menu-title"><span>详情</span></div>
+                        <div class="menu-underline"></div>
+                    </div>
+                    <div id="item2">
+                        <div class="menu-title"><span style="color:grey;">规格</span></div>
+                        <div class="menu-underline"></div>
+                    </div>
+                    <div id="item3">
+                        <div class="menu-title"><span style="color:grey;">售后保障</span></div>
+                        <div class="menu-underline"></div>
+                    </div>
+                    <div id="item4">
+                        <div class="menu-title">
+                            <p style="color:grey;">评价<span style="color:#f4212b;"><?= $total_evaluate; ?></span></p>
+                        </div>
+                        <div class="menu-underline"></div>
+                    </div>
+                </div>
+                <!-- 4-tab title -->
+            </div>    
+            <!--titlebar -->
+        </div>
+    </div>
+    <?php }?> 
+    <div style="height:34px"></div> <!-- 占据上面框的高度 -->
+    <!--content div-->
+    <div class="content">
+        <!-- 商品详情页1  -->
+        <div class="shangpin-content shangpin-first">
+            <div id="gallery-tab" class="gallery-tab-sty">
+                <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='' style="position: relative">
+                    <?php
+                    if(!$d_link){//不是3d素材原样输出
+                    ?>
+                        <ul id="scroll" class="am-slides">
+                            <?php
+                            foreach ($new_imgurl as $k => $v): ?>
+                                <li><img src="/weixinpl/mshop/images/loading.gif" data-original="<?php echo $new_baseurl . $v['imgurl']; ?>?x-oss-process=image/resize,w_800"></li>
+                            <?php endforeach ; ?>
+                        </ul>
+                    <?php
+                    }
+                    else { ?>
+                            <img src="3d_logo.png"  style="width: 50px;height: 50px;position: absolute;top: 0;left: 0;
+                            <?php if ($is_show_tag_threed == '0'){ ?>display:none;; <?php } ?>" >
+                            <iframe src="<?php echo $d_link; ?>" width="100%" height='365px'style="float: left;"></iframe>
+                    <?php }
+                    ?>
+                </div>
+            </div>
+            <?php
+
+            if (($issnapup || $restricted_isout == 1 ) && !$is_collage_product):    //拼团产品不显示抢购时间 ?>
+                <div class="shangpin-first-remain" style="display:none">
+                    <span id="time_name">距开始仅剩:</span>
+                    <span class="information margin-space-span" id="day">0</span>
+                    <span class="unit">天</span>
+                    <span class="information" id="hour">0</span>
+                    <span class="unit">时</span>
+                    <span class="information" id="minute">0</span>
+                    <span class="unit">分</span>
+                    <span class="information" id="second">0</span>
+                    <span class="unit">秒</span>
+                </div>
+            <?php endif;
+            if ($is_collage_product || $pro_act_type == 22)://或积分兑换产品 ?>
+                <div class="shangpin-first-remain-collage" style="display:none;">
+                    <span id="collage_time_name">距开始仅剩:</span>
+                    <span class="information margin-space-span" id="collage-day">0</span>
+                    <span class="unit">天</span>
+                    <span class="information" id="collage-hour">0</span>
+                    <span class="unit">时</span>
+                    <span class="information" id="collage-minute">0</span>
+                    <span class="unit">分</span>
+                    <span class="information" id="collage-second">0</span>
+                    <span class="unit">秒</span>
+                </div>
+            <?php endif; ?>
+            <div class="shangpin-neirong">
+                <div class="shangpin-neirong-left" style="max-width: 100%;display: inline-block;">
+                    <span class="shangpin-neirong-content line-clamp-2"
+                        <?php if (!empty($result["collage_product_info"])): ?> style="width: 100%;display: inline-block;font-size:16px;"<?php endif; ?>>
+                    <?php
+                    if ($isbrand_supply) {
+                        echo '<span class="shangpin-neirong-title">品牌</span>';
+                    }
+                    echo $name;
+                    ?>
+                    <?php $share_title = $name; ?>
+                    </span>
+
+                    <small class="line-clamp-2" style="font-size:14px;color:<?= $short_introduce_color ?: "#000000"; ?>">
+                        <?= $introduce?>
+                    </small>
+                </div>
+                <div class="shangpin-neirong-right">
+                    <?php
+                    if (!empty($collage_product_info)) {
+                        echo '<span class="collageTag">' . $collage_product_info['type_name'] . '</span>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <!-- 是否为云店的自营产品  样式改变-->
+            <?php if($yundian == $pro_yundian_id && $yundian != -1){?>
+            <div class="shangpin-price">
+                <span class="curprice">
+                <?php
+
+                if ($integral_type == 2 && $integral_result['errcode'] == 0 && ($integral_result['data'][$pid]['integral_p'] > 0 || $integral_result['data'][$pid]['store_integral_p'] > 0)) {
+                    // if ($shop_integral_onoff == 1) {
+                    //     echo $integral_result['data'][$pid]['integral_p'] . $shop_int_name;
+                    // } else{
+                    //     echo $integral_result['data'][$pid]['store_integral_p'] . $store_int_name;
+                    // }
+
+
+                    if($integral_result['data'][$pid]['only_type'] == '-1'){                //兑换活动有商城积分和门店积分
+                        if ($shop_integral_onoff == 1) {
+                            echo $integral_result['data'][$pid]['integral_p'] . $shop_int_name;
+                        } else{
+                            echo $integral_result['data'][$pid]['store_integral_p'] . $store_int_name;
+                        }
+                    }else if($integral_result['data'][$pid]['only_type'] == 1){             //兑换活动仅仅只有商城积分
+                        if ($shop_integral_onoff == 1) {
+                            echo $integral_result['data'][$pid]['integral_p'] . $shop_int_name;
+                        }
+                    }else if($integral_result['data'][$pid]['only_type'] == 2){             //兑换活动仅仅只有门店积分
+                        if ($store_integral_onoff == 1) {
+                            echo $integral_result['data'][$pid]['store_integral_p'] . $store_int_name;
+                        }
+                    }
+
+
+
+                    if ($integral_result['data'][$pid]['money_p'] > 0) {
+                        echo "+" . $oof_before . $integral_result['data'][$pid]['money_p'] ;
+                    }
+                } else {
+                    echo $oof_before;
+                    echo $show_now_price;
+                    echo $oof_after;
+                } ?>
+                </span>
+                <?php if ($is_show_original) {
+                    echo '<span class="primeprice">';
+                    echo $oof_before;
+                    echo $p_orgin_price;
+                    echo $oof_after;
+                    echo '</span>';
+                }
+
+                
+                ?>
+                <div class="div-float-right">
+                    <div class="yundian-product-num">
+                        <div class="key-box jian" onclick="minusNum();">-</div>
+                        <input class="key-input" type="num" name="yundian_num" id="yundian_num" value="1" autocomplete="off" onkeyup="clearNoNum(this)"
+                                   onafterpaste="clearNoNum(this)"/>
+                        <div class="key-box add" onclick="addNum();">+</div>
+                      </div>
+                </div>
+                <div class="curprice-small line-clamp-2" style="color:<?= $remark_color ?: "#000000"; ?>;"><?= $remarks; ?></div>
+            </div>
+            <div class="shangpin-price">
+                <span class='primeprice' style='color:grey;font-size:13px;text-decoration:none;';>
+                <?php
+                if ($isOpenSales > 0) {
+                    echo "已售{$total_sales}";
+                    
+                }else{
+                    echo '&nbsp';
+                }
+                ?>
+                </span>
+                <div class="div-float-right">
+                    <div id='yishou'><span>库存<?= $p_storenum; ?></span></div>
+                </div>
+            </div>
+            <div class="shangpin-addinfo">
+<!--                 <?php
+                if ($payondelivery_id && $is_pay_on_delivery == 1 && empty($collage_product_info)) {
+                    echo '<span id="newtag">货到付款</span>';
+                }
+                if ($showAndCashback['display'] == 1 or ($is_promoters > 0 and $is_commission_cal > 0)) {
+                    if ($showAndCashback['display'] == 1) {
+                        if ($showAndCashback['cashback_m'] > 0 && $is_cashback == 1) {
+                            echo '<span id="newtag">赠' . $oof_before . $showAndCashback['cashback_m'] . $oof_after . '</span>';
+                        }
+                        if ($is_currency && $back_currency > 0) {
+                            echo '<span id="newtag">赠' . $back_currency . $custom . '</span>';
+                        }
+                    }
+                }
+                if ($integral_type == 1 && $integral_result['errcode'] == 0 && $integral_result['data'][$pid]['consume_integral_p'] > 0) {
+                    echo '<span id="newtag">送'. $shop_int_name . $integral_result['data'][$pid]['consume_integral_p'] . '</span>';
+                }
+                // echo $integral_type;
+
+                if ($isOpenCurrency > 0 and $currency_price > 0) {
+                    echo '<span id="newtag">可用' . $custom . $currency_price . '</span>';
+                }
+                if ($renewal_id > 0 && $renewal_time > 0) {
+                    echo '<span id="newtag">续费' . $renewal_time . '天</span>';
+                }
+                if ($isvp == 1 and $vp_score > 0) {
+                    echo '<span id="newtag">vp:' . $vp_score . '</span>';
+                }
+                if ($isshowdiscount == 1 and 10 > $pro_discount and $pro_discount > 0) {
+                    echo '<span id="newtag">' . $pro_discount . '折</span>';
+                }
+                if ($is_free_shipping == 1) {
+                    echo '<span id="newtag">包邮</span>';
+                }
+                if ($is_invoice == 1){
+                    echo '<span id="newtag">发票</span>';
+                }
+                if ($delivery_id > 0) {
+                    echo '<span id="newtag">预</span>';
+                }
+                if ($tax_type > 1) {
+                    echo '<span id="newtag">税</span>';
+                }
+                //if(($is_restricted==1) && ($restricted_isout==1)){
+                //echo '<span id = "newtag">限</span>';
+                //}
+                if ($islimit || $restricted_isout) {
+                    echo '<span id="newtag">限</span>';
+                }
+                if ((1 == $is_charitable) && (0 < $charitable_price)) {
+                    echo '<span id="newtag">捐'.$oof_before.$charitable_price.$oof_after.'</span>';
+                } ?> -->
+            </div>
+            <?php }else{ ?>
+            <div class="shangpin-price">
+                <span class="curprice">
+                <?php
+
+                if ($integral_type == 2 && $integral_result['errcode'] == 0 && ($integral_result['data'][$pid]['integral_p'] > 0 || $integral_result['data'][$pid]['store_integral_p'] > 0)) {
+                    // if ($shop_integral_onoff == 1) {
+                    //     echo $integral_result['data'][$pid]['integral_p'] . $shop_int_name;
+                    // } else{
+                    //     echo $integral_result['data'][$pid]['store_integral_p'] . $store_int_name;
+                    // }
+
+
+                    if($integral_result['data'][$pid]['only_type'] == '-1'){                //兑换活动有商城积分和门店积分
+                        if ($shop_integral_onoff == 1) {
+                            echo $integral_result['data'][$pid]['integral_p'] . $shop_int_name;
+                        } else{
+                            echo $integral_result['data'][$pid]['store_integral_p'] . $store_int_name;
+                        }
+                    }else if($integral_result['data'][$pid]['only_type'] == 1){             //兑换活动仅仅只有商城积分
+                        if ($shop_integral_onoff == 1) {
+                            echo $integral_result['data'][$pid]['integral_p'] . $shop_int_name;
+                        }
+                    }else if($integral_result['data'][$pid]['only_type'] == 2){             //兑换活动仅仅只有门店积分
+                        if ($store_integral_onoff == 1) {
+                            echo $integral_result['data'][$pid]['store_integral_p'] . $store_int_name;
+                        }
+                    }
+
+
+
+                    if ($integral_result['data'][$pid]['money_p'] > 0) {
+                        echo "+" . $oof_before . $integral_result['data'][$pid]['money_p'] ;
+                    }
+                } else {
+                    echo $oof_before;
+                    echo $show_now_price;
+                    echo $oof_after;
+                } ?>
+                </span>
+                <?php if ($is_show_original) {
+                    echo '<span class="primeprice">';
+                    echo $oof_before;
+                    echo $p_orgin_price;
+                    echo $oof_after;
+                    echo '</span>';
+                }
+          
+           /************pine****************/
+                 if ($p_vip_price) {
+                 echo '<span class="curprice" style="margin-left: 10px"> VIP:';
+                  echo $oof_before;
+                  echo $p_vip_price;
+                  echo $oof_after;
+                 echo '</span>';
+                           
+                               } 
+
+                if ($isOpenSales > 0) {
+                    echo "<div id='yishou'><span>已售{$total_sales}</span></div>";
+                }
+                ?>
+                <div class="div-float-right"></div>
+                <div class="curprice-small line-clamp-2" style="color:<?= $remark_color ?: "#000000"; ?>;"><?= $remarks; ?></div>
+            </div>
+            <div class="shangpin-addinfo">
+                <?php
+                if ($payondelivery_id && $is_pay_on_delivery == 1 && empty($collage_product_info)) {
+                    echo '<span id="newtag">货到付款</span>';
+                }
+                if ($showAndCashback['display'] == 1 or ($is_promoters > 0 and $is_commission_cal > 0)) {
+                    if ($showAndCashback['display'] == 1) {
+                        if ($showAndCashback['cashback_m'] > 0 && $is_cashback == 1) {
+                            echo '<span id="newtag">赠' . $oof_before . $showAndCashback['cashback_m'] . $oof_after . '</span>';
+                        }
+                        if ($is_currency && $back_currency > 0) {
+                            echo '<span id="newtag">赠' . $back_currency . $custom . '</span>';
+                        }
+                    }
+                }
+                if ($integral_type == 1 && $integral_result['errcode'] == 0 && $integral_result['data'][$pid]['consume_integral_p'] > 0) {
+                    echo '<span id="newtag">送'. $shop_int_name . $integral_result['data'][$pid]['consume_integral_p'] . '</span>';
+                }
+                // echo $integral_type;
+
+                if ($isOpenCurrency > 0 and $currency_price > 0) {
+                    echo '<span id="newtag">可用' . $custom . $currency_price . '</span>';
+                }
+                if ($renewal_id > 0 && $renewal_time > 0) {
+                    echo '<span id="newtag">续费' . $renewal_time . '天</span>';
+                }
+                if ($isvp == 1 and $vp_score > 0) {
+                    echo '<span id="newtag">vp:' . $vp_score . '</span>';
+                }
+                if ($isshowdiscount == 1 and 10 > $pro_discount and $pro_discount > 0) {
+                    echo '<span id="newtag">' . $pro_discount . '折</span>';
+                }
+                if ($is_free_shipping == 1) {
+                    echo '<span id="newtag">包邮</span>';
+                }
+                if ($is_invoice == 1){
+                    echo '<span id="newtag">发票</span>';
+                }
+                if ($delivery_id > 0) {
+                    echo '<span id="newtag">预</span>';
+                }
+                if ($tax_type > 1) {
+                    echo '<span id="newtag">税</span>';
+                }
+                //if(($is_restricted==1) && ($restricted_isout==1)){
+                //echo '<span id = "newtag">限</span>';
+                //}
+                if ($islimit || $restricted_isout) {
+                    echo '<span id="newtag">限</span>';
+                }
+                if ((1 == $is_charitable) && (0 < $charitable_price)) {
+                    echo '<span id="newtag">捐'.$oof_before.$charitable_price.$oof_after.'</span>';
+                } ?>
+            </div>
+           
+            <!--优惠券 start-->
+            <?php if ($result_coupon_num > 0 && $link_coupons > -1 && $is_coupon > 0) { ?>
+                <div class="shangpin-addprice " onclick="show_coupon();" style="">
+                    <span style="float:left;font-size:0;">
+                        <a style="font-size:14px;background-color:red;color:white;line-height:1;padding:3px 5px 2px 5px;display:inline-block;vertical-align:middle;">优惠券</a>
+                        <a style="padding-left:10px;color:gray;font-size:15px;    display: inline-block;vertical-align: middle;">领取优惠券</a>
+                    </span>
+                    <span class="coupon_get"><img src="./images/vic/right_arrow.png" width="8" height="14" style="margin:-4px 0 0 0;"></span>
+                    <div class="clear_float"></div>
+                </div>
+            <?php } ?>
+            <!--优惠券 end-->
+            <?php if ($is_aog > 0) {  //预到货?>
+                <div class="shangpin-address" onclick="changeAddress();">
+                    <div class="shangpin-address-left">送至</div>
+                    <div class="shangpin-address-right">
+                        <div class="shangpin-address-text">
+                            <img src="./images/icon-position.png" class="position-icon">
+                            <span class="ellipsis aog_address"><?= $aog_p . $aog_c . $aog_a . $aog_d; ?></span>
+                            <img src="./images/hjian.png" class="after-icon">
+                        </div>
+                        <div class="shangpin-address-small">
+                            <span class="skin-color is_available"><?= $is_available_str; ?></span>
+                            <span class="available_tip" <?php if (!$is_available || $aog_date == '') { ?>style="display: none;"<?php } ?>>
+                                ，预计(<span class="aog_date"><?= $aog_date; ?></span>)送达
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="changeAddress" onclick="offAddress();"></div>
+                <div class="Address-box">
+                    <div class="Address-title">
+                        <span onclick="offAddress();"><img src="./images/ico_zuo.png"></span>
+                        请选择区域地址
+                    </div>
+                    <div class="Address-list">
+                        <span>省市区</span>
+                        <ul>
+                            <li><select id="WSY_provinces" name="WSY_provinces"></select></li>
+                            <li><select id="WSY_city" name="WSY_city"></select></li>
+                            <li><select id="WSY_area" name="WSY_area"></select></li>
+                        </ul>
+                    </div>
+                    <div class="Address-list">
+                        <span>街 道</span>
+                        <p><select id="WSY_Street"></select></p>
+                    </div>
+                    <div class="Address-btn">
+                        <button class="skin-bg" onclick="up_Address();">确认提交</button>
+                    </div>
+                </div>
+                <script>
+                    var aog_area = eval(<?= json_encode($aog_area);?>),
+                        selectedPros = '',
+                        is_available = '<?= $is_available;?>',
+                        aog_p = '<?= $aog_p;?>',
+                        aog_c = '<?= $aog_c;?>',
+                        aog_a = '<?= $aog_a;?>',
+                        aog_d = '<?= $aog_d;?>';
+                    console.log(aog_p);
+                    $('#WSY_provinces, #WSY_city, #WSY_area').change(function () {
+                        var _aog_p = $('#WSY_provinces').val(),
+                            _aog_c = $('#WSY_city').val(),
+                            _aog_a = $('#WSY_area').val(),
+                            _aog_address = _aog_p + _aog_c + _aog_a;
+                        var _pros = '';
+                        if (selectedPros == '') {
+                            _pros = -1;
+                        } else {
+                            _pros = selectedPros;
+                        }
+                        var aog_html = '<option value="">请选择</option>';
+                        $('#WSY_Street').find('option').remove();
+                        if (Object.getOwnPropertyNames(aog_area).length > 0) {
+                            var _aog_area = [];
+                            for (i in aog_area) {
+                                _aog_area[i] = [];
+                                for (j in aog_area[i]) {
+                                    var str = i + '=' + aog_area[i][j];
+                                    _aog_area[i][j] = aog_area[i][j];
+                                }
+                            }
+                            try {
+                                if (_aog_area[_pros] != 'undefined' && _aog_area[_pros][_aog_address] != 'undefined') {
+                                    _aog_d = _aog_area[_pros][_aog_address];
+                                    for (i in _aog_d) {
+                                        if (_aog_d[i] == '') {
+                                            continue;
+                                        }
+                                        aog_html += '<option value="' + _aog_d[i] + '">' + _aog_d[i] + '</option>';
+                                    }
+                                }
+                            } catch (e) {}
+                        }
+                        $('#WSY_Street').append(aog_html);
+                    })
+                    $(function () {
+                        // 选择地址begin
+                        new PCAS('WSY_provinces', 'WSY_city', 'WSY_area', '<?= $aog_p;?>', '<?= $aog_c;?>', '<?= $aog_a;?>', 1);
+                        $('#WSY_Street').val(aog_d);
+                        // 选择地址end
+                    })
+                </script>
+                <?php
+            }
+            $delivery_datetime = [];
+
+            if ($delivery_id > 0) {     //预配送代码
+                ?>
+                <div class="delivery_id" style="display: none">
+                    <div class="shangpin-line"></div>
+                    <input type="hidden" value="" id="preDeliveryDate"/>
+                    <input type="hidden" value="" id="preDeliveryTime"/>
+                    <div class="shangpin-addprice buttom-none">
+                        <input type="text" class="getmovetime">
+                        <span style="font-size:15px;color:#707070;">时间选择:</span>
+                        <span class="coupon_get">
+                            <span class="showmovetime"></span>
+                            <span class="showmovelist"></span>
+                            <img src="./images/vic/right_arrow.png" width="8" height="14" class="coupon_get_img">
+                        </span>
+                        <div class="clear_float"></div>
+                    </div>
+                    <div class="shangpin-neardate">
+                        <input type="text" class="getmovetime">
+                        <ul>
+                            <?php
+                            $delivery_limit = 0;
+
+                            foreach ($pre_delivery_time['delivery_time'] as $key => $val) {
+                                //去掉月份的0
+                                $key_arr = explode('-', $key);
+                                if ($key_arr[1] < 10) {
+                                    $key_arr[1] = str_replace('0', '', $key_arr[1]);
+                                }
+                                $key_new = implode('-', $key_arr);
+                                $delivery_datetime[] = array('style' => 1, 'day' => $key_new);
+                                if ($delivery_limit >= 4) {
+                                    continue;
+                                }
+                                $delivery_date_new = date('m-d', strtotime($key));
+                                ?>
+                                <li date="<?= $key; ?>">
+                                    <a onclick="addTimeList('<?= $key; ?>');">
+                                        <p class="time"><?= $delivery_date_new; ?></p>
+                                        <p class="price"><?= $val['week']; ?></p>
+                                    </a></li>
+                                <?php
+                                $delivery_limit++;
+                            }
+                            ?>
+                        </ul>
+                        <div class="allDate">
+                            全部<br>日期
+                        </div>
+                    </div>
+                    <div class="shangpin-line"></div>
+                </div>
+                <?php
+            }
+            if ($showAndCashback['display'] == 1 or ($is_promoters > 0 and $is_commission_cal > 0)) {   //返现金额 ?>
+                <div class="shangpin-addprice" style="border-bottom:1px solid #d1d1d1">
+                    <?php if ($is_promoters > 0 and $is_commission_cal > 0 /* and $issell_model==2 */) { ?>
+                        <div class="span">
+                            <?php if ($is_collage_product == 1) { ?>
+                                <div onclick="reckon_commision()">
+                                    <img class="count" src="images/goods_image/count.png">
+                                    <img class="countld" src="images/goods_image/countld.png">
+                                    <span class="countDet"><?= $commission_cal_content; ?></span>
+                                </div>
+
+                            <?php } else { ?>
+                                <div onclick="reckon_commision()">
+                                    <img class="count" src="images/goods_image/count.png">
+                                    <img class="countld" src="images/goods_image/countld.png">
+                                    <span class="countDet"><?= $commission_cal_content; ?></span>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div class="shangpin-line"></div>
+                <?php
+            }
+            if ($link_package > 0) { ?>
+                <div class="shangpin-line"></div>
+                <a href="./product_detail_gift.php?package_id=<?= $link_package; ?>">
+                    <div class="shangpin-addprice" style="width: 100%;height: auto;">
+                        <div class="span" style="margin-left: 0px;">
+                            <p style="font-size:14px;background-color:red;color:white;line-height:1;padding:3px 5px 2px 5px;display:inline-block;vertical-align:middle;">大礼包</p>
+                            <p style="padding-left:10px;color:gray;font-size:15px;    display: inline-block;vertical-align: middle;">领取大礼包</p>
+                            <img style="width: 100%;padding-right: 8px;" src="<?= $link_package_img; ?>">
+                        </div>
+                    </div>
+                </a>
+            <?php }
+
+            if (!empty($explain) and $explain['status'] == 1) { //拼团活动说明
+                ?>
+                <div class="shangpin-panel3">
+                    <div class="det">
+                        <span class="exp"><?= $explain['title']; ?></span>
+                        <div class="icon"><span>!</span></div>
+                        <img class="detBtn" src="images/collage_activity/xiala_icon.png">
+                        <div class="detBottom">
+                            <p class="time">活动时间：<?= $collage_product_info['start_time'] . ' - ' . $collage_product_info['end_time']; ?></p>
+                            <div class="detCell"><?= $explain['content']; ?></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shangpin-line"></div>
+                <?php
+            }
+
+            if (!empty($groups) ) {  //拼团，团推荐数据
+                ?>
+                <div class="shangpin-panel3">
+                    <div class="det" style="max-height:255px;overflow:scroll;">
+                        <span class="exp">小伙伴的拼团,你可以参加噢!</span>
+                        <a href="./collageActivities/product_list_view.php?customer_id=<?= $customer_id_en; ?>&op=popularity">
+                            <img class="detBtn2" src="images/collage_activity/icon2.png"/>
+                            <span class="expMore">人气拼团</span>
+                        </a>
+                        <?php
+                        foreach ($groups as $k => $v) {
+                            if (empty($v['weixin_headimgurl'])) {
+                                $v['weixin_headimgurl'] = '../../common/custom_temp/images/username.png';
+                            } else {
+                                $pos = strpos($v['weixin_headimgurl'], "http://");
+                                $pos2 = strpos($v['weixin_headimgurl'], "https://");
+                                if ($pos === 0 || $pos2 === 0) {
+                                } else {
+                                    $pos1 = strpos($v['weixin_headimgurl'], "../../../");
+                                    $pos2 = strpos($v['weixin_headimgurl'], "../../");
+                                    $pos3 = strpos($v['weixin_headimgurl'], "../");
+                                    if ($pos1 === 0) {
+                                        $v['weixin_headimgurl'] = substr($v['weixin_headimgurl'], 9);
+                                    } elseif ($pos2 === 0) {
+                                        $v['weixin_headimgurl'] = substr($v['weixin_headimgurl'], 6);
+                                    } elseif ($pos3 === 0) {
+                                        $v['weixin_headimgurl'] = substr($v['weixin_headimgurl'], 3);
+                                    }
+                                    $v['weixin_headimgurl'] = BaseURL . $v['weixin_headimgurl'];
+                                }
+                            }
+                            ?>
+                            <div class="detCell3">
+                                <img class="headImg2" src="/weixinpl/mshop/images/loading.gif" data-original="<?= $v['weixin_headimgurl']; ?>?x-oss-process=image/resize,w_200"/>
+                                <div class="box1">
+                                    <p class="line1"><?= $v['weixin_name'] ? $v['weixin_name'] : $v['name']; ?></p>
+                                    <p class="line2"><?= $v['province']; ?></p>
+                                    <p class="line3">
+                                        剩余时间
+                                        <span class="rest_time rest_time_<?= $v['id'] ?>" data-id="<?= $v['id']; ?>" data-end_time="
+                                        <?= $v['endtime']=='0000-00-00 00:00:00' ? strtotime($v['end_time']) : strtotime($v['endtime']);?>"></span>
+                                    </p>
+                                </div>
+                                <div class="box2">
+                                    <p class="top">还差<span><?= $v['success_num'] - $v['join_num']; ?></span>人</p>
+                                    <a href="./collageActivities/activities_detail_view.php?customer_id=<?= $customer_id_en; ?>&group_id=<?= $v['id']; ?>">
+                                        <p class="bottom ">去参团<img src="images/collage_activity//icon2_white.png"/></p></a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="shangpin-line"></div>
+                <?php
+            }
+            ?>
+
+            <div class="shangpin-panel3">
+                <div class="shangpin-panel3-item1">
+                    <img id="url2" src="/weixinpl/mshop/images/loading.gif" data-original="<?= $brand_logo; ?>?x-oss-process=image/resize,w_260">
+                    <span id="name"><?= $brand_supply_name; ?></span>
+                    <?php if ($advisory_flag) {  //咨询电话是否开启?>
+                        <div class="shangpin-panel3-item1-content">
+                            <a class="tela" href="tel:<?= $advisory_telephone ?>"><img id="phone" src="./images/goods_image/phone_1.png" width="25" height="25"></a>
+                            <span></span>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <?php
+                if ($is_supply_id > 0) {     //是否供应商产品
+                    if ($isbrand_supply) {  //是否品牌供应商
+                        ?>
+                        <div class="s-line"></div>
+                        <div class="shangpin-panel3-item2">
+                            <div class="shangpin-panel3-item2-left1">
+                                <div class="shangpin-panel3-item2-left1-item1"><span id="collect_num"><?= $collect_num ?: 0; ?></span>
+                                </div>
+                                <div class="shangpin-panel3-item2-left1-item1"><span style="color:#5f666b;">收藏</span></div>
+                            </div>
+                            <div class="shangpin-panel3-item2-left1">
+                                <div class="shangpin-panel3-item2-left1-item1"><span><?= $pro_num ? $pro_num : 0; ?></span></div>
+                                <div class="shangpin-panel3-item2-left1-item1"><span style="color:#5f666b;">全部商品</span></div>
+                            </div>
+                            <div class="shangpin-panel3-item2-left1">
+                                <div class="shangpin-panel3-item2-left1-item1"><span><?= $total_evaluate ?: 0; ?></span></div>
+                                <div class="shangpin-panel3-item2-left1-item1"><span style="color:#5f666b;">评价</span></div>
+                            </div>
+                        </div>
+                        <div class="shangpin-panel3-item3">
+                            <div class="shangpin-panel3-wrapper">
+                                <?php
+                                $query_s = 'select count(1) as scount from weixin_user_collect where isvalid=true and collect_id=' . $is_supply_id . ' and customer_id=' . $customer_id . ' and collect_type=2 and user_id=' . $user_id;
+                                $result_s = mysql_find($query_s);
+                                $scount = $result_s["scount"] ?: 0;     //是否已收藏：0否，1是
+                                ?>
+                                <button id="bookmark" type="button" class="am-btn store-button  collect_shop_1" onclick="collect(<?= $is_supply_id; ?>,2,'add',0)"
+                                        style="<?php if ($scount > 0) {echo 'display:none;';} ?>">收藏店铺
+                                </button>
+                                <button id="bookmark_collected" class="am-btn store-button collect_shop_2" onclick="collect(<?= $is_supply_id; ?>,2,'del',0)"
+                                        style="<?php if (0 == $scount) {echo 'display:none;';} ?>">已收藏
+                                </button>
+                            </div>
+                            <div class="shangpin-panel3-wrapper">
+                                <?php if ($shop_jump_type == 0) { ?>
+                                    <a href="my_store/my_store.php?supplier_id=<?= $is_supply_id ?>&customer_id=<?= $customer_id_en; ?>">
+                                        <button id="entershop" type="button" class="am-btn store-button  ">进入店铺</button>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="my_store/my_store_list.php?supplier_id=<?= $is_supply_id ?>&customer_id=<?= $customer_id_en; ?>&product_type=1">
+                                        <button id="entershop" type="button" class="am-btn store-button  ">进入店铺</button>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                            <div class="shangpin-panel3-wrapper">
+                                <a class="chat" onclick="locatP(4);">
+                                    <button id="entershop" type="button" class="am-btn store-button  ">联系客服</button>
+                                </a>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+            </div>
+            <div class="shangpin-line"></div>
+
+            <?php if ($is_guess_you_like && $is_collage_product == 0) { //拼团不显示猜你喜欢 ?>
+                <div class="shangpin-panel4">
+                    <div id="shangpin-panel4-item1"> 猜你喜欢</div>
+                    <div id="shangpin-panel4-item2"></div>
+                    <div id="shangpin-panel4-item3">
+                        <div class="shangpin-panel4-item3-wrapper">
+                            <button id="changeset" type="button" class="am-btn ">换一组</button>
+                        </div>
+                        <div class="shangpin-panel4-item3-wrapper">
+                            <a href="list.php?customer_id=<?= $customer_id_en; ?>&pid=<?= $pid; ?>&op=morelike">
+                                <button id="seemore" type="button" class="am-btn ">查看更多</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <div class="shangpin-line shangpin-panel4_xian"></div>
+        </div>
+        <!-- 商品详情页1 -->
+
+        <!-- 商品详情页2 -->
+        <!-- 详情 -->
+        <div class="titlebar-container-menu-div titlebar-container-menu-secondary" id="secondmenu2">
+            <div id="item1"><div class="menu-title"><span>详情</span></div></div>
+            <div id="item2"><div class="menu-title"><span>规格</span></div></div>
+            <div id="item3"><div class="menu-title"><span>售后保障</span></div></div>
+            <?php if ($is_showdiscuss > 0) { ?>
+                <div id="item4">
+                    <div class="menu-title">
+                        <span>评价<a style="color:#f4212b;margin-left:5px"><?= $total_evaluate ?></a></span>
+
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+        <?php }?>
+        <!-- 云店结束 -->
+        <div class="shangpin-content shangpin-second1 shangpin-content-second" style="position: relative;">
+            <?php echo html_entity_decode($description); ?>
+        </div>
+
+
+        <!--  详情-->
+        <!-- 规格 -->
+        <div class="shangpin-content shangpin-second2 shangpin-content-second">
+            <?= $specifications; ?>
+        </div>
+        <!-- 规格 -->
+        <div class="shangpin-content shangpin-second3 shangpin-content-second">
+            <?= $customer_service; ?>
+        </div>
+        <!--评价-->
+        <?php if ($is_showdiscuss > 0) { ?>
+            <div class="shangpin-content shangpin-second4 shangpin-content-second">
+                <div class="item-top">
+                    <span>商品好评率:</span>
+                    <span class="shangpin-second4-item1-span">
+                        <?php if ($total_evaluate != 0) {
+                            echo round(100 * ($good_level / $total_evaluate), 2) . "%";
+                        } else {
+                            echo '0';
+                        } ?>
+                    </span>
+                </div>
+                <div class="item" class="div-float-left">
+                    <div class="item2-cell1 colorchange" PL="0">
+                        <div class="shangpin-second4-item2-cell">全部</div>
+                        <div class="shangpin-second4-item2-cell">(<?= $total_evaluate; ?>)</div>
+                    </div>
+                    <div class="item2-cell2 colorchange" PL="1">
+                        <div class="shangpin-second4-item2-cell2">好评</div>
+                        <div class="shangpin-second4-item2-cell2">(<?= $good_level; ?>)</div>
+                    </div>
+                    <div class="item2-cell3 colorchange" PL="2">
+                        <div class="shangpin-second4-item2-cell2">中评</div>
+                        <div class="shangpin-second4-item2-cell2">(<?= $meu_level; ?>)</div>
+                    </div>
+                    <div class="item2-cell4 colorchange" PL="3">
+                        <div class="shangpin-second4-item2-cell2">差评</div>
+                        <div class="shangpin-second4-item2-cell2">(<?= $bad_level; ?>)</div>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                <div style="position: relative;">
+                    <div id="wrapper">
+                        <div id="scroller">
+                            <ul id="thelist"></ul>
+                            <p id="pinterestMore" style="display: none;">----- 正在加载 -----</p>
+                            <p id="pinterestDone" style="display:none;">----- 评论已加载完毕 -----</p>
+                        </div>
+                    </div>
+                </div>
+                <!--评价-->
+                <!-- 商品详情页2  -->
+            </div>
+        <?php } ?>
+        <!--content div-->
+        <!--悬浮按钮-->
+        <?php
+        $fun = "mshop_product_detail";
+        require_once('../common/utility_setting_function.php');
+        $nav_is_publish = check_nav_is_publish($fun, $customer_id);
+        $is_publish = check_is_publish(2, $fun, $customer_id);
+        if($yundian == $pro_yundian_id && $yundian != -1){
+            echo '<div class="pack-up4 " id="packUp4" style="position:relative;left:100%;margin-left:-45px;display: none;width: 45px; height: 45px;background: rgba(0,0,0,0.7);color:white;padding-top:5px;padding-left:3px;opacity:0.8;text-align:center">
+                    <img class="pack-up-icon4" style="width: 25px; height: 25px;margin-top:6px" src="/weixinpl/mshop/images/icon-topw.png">
+                 </div>'; 
+        }else{
+            include_once('float.php'); 
+        }                              
+        ?>
+        <!--悬浮按钮-->
+        <!--引导关注 绑定手机 下载app按钮-->
+        <?php include '../common_shop/jiushop/share.php'; ?>
+        <!--引导关注 绑定手机 下载app按钮-->
+        <!-- footer content -->
+        <?php if ($is_collage_product) { //如果是团购则不进入买卖模式 ?>
+            <div class="shangpin-footer" style="text-align: center;line-height: 62px;">
+            <?php if(($collage_product_info['alone_onoff'] && $collage_product_info['p_alone_onoff'] ) || $collage_product_info['type']==5){ ?>
+                <?php if ($is_supply_id > 0 && (0 == $is_admin_closed || 0 == $is_owner_closed)) { ?>
+                    <button id="singleBuy" type="button" class="am-btn  am-btn-danger item2-panel-button text-hidden" disabled="disabled">
+                        <span>商家休息中</span><span>不能单独购买</span>
+                    </button>
+                <?php } else { ?>
+                    <button id="singleBuy" onclick="if(!showlevel(<?= $is_allow_buy; ?>)){return;}groupBuyType=1;removeActive();showBuyDiv(2);"
+                            type="button" class="am-btn skin-b2 am-btn-danger item2-panel-button" disabled="disabled">
+                        <span>
+                        <?php
+                        echo $oof_before;
+                        echo $show_now_price;
+                        echo $oof_after;
+                        ?>
+                        </span>
+                        <span>单独购买</span>
+                    </button>
+        <?php }}
+                //成团人数
+                $group_num = $collage_product_info['group_size'];
+                if ($collage_product_info['success_num'] != -1) {
+                    $group_num = $collage_product_info['success_num'];
+                } ?>
+                <button id="collageBuy" onclick="groupBuyType=2;removeActive();showBuyDiv(2);" type="button"
+                        class="am-btn skin-b1 am-btn-danger item2-panel-button" disabled="disabled" style="<?php if(($collage_product_info['alone_onoff'] && $collage_product_info['p_alone_onoff'] ) || $collage_product_info['type']==5){ ?>width:47%;<?php }else{ ?>width:94%;<?php }?>">
+                    <span>
+                    <?php
+                    echo $oof_before;
+                    echo $groupPrice;
+                    echo $oof_after;
+                    ?>
+                    </span>
+                    <span><?= $group_num; ?>人团</span>
+                </button>
+            </div>
+        <?php } else {
+            if ($isout == 1) { ?>
+                <!--当商品下架时显示提示-->
+                <div style="width:100%;height:56px;line-height:56px;background-color: #0a0a0a;opacity: 0.7;color:#fff;position: fixed;bottom:64px;text-align: center;">该商品已经下架！</div>
+            <?php } ?>
+            <div class="shangpin-footer">
+                <?php
+                if ($user_id) { //是否已收藏产品
+                    $query_c = "select count(1) as rcount from weixin_user_collect where isvalid=true and customer_id=" . $customer_id . " and user_id=" . $user_id . " and collect_id=" . $pid . " and collect_type=1";
+                    $result_c = mysql_find($query_c);
+                    $rcount = $result_c["rcount"] ?: 0;
+                }
+                ?>
+                <!-- 是否为云店的自营产品 -->
+                <?php if($yundian == $pro_yundian_id && $yundian != -1){?>
+                    <?php 
+                        $query_yundian_code = "select qr_code as yundian_kefu_code,user_id from ".WSY_USER.".weixin_yundian_keeper where isvalid = true and  customer_id='" . $customer_id . "' and id = '" . $yundian. "' and status = 1";
+                        $result_yundian = mysql_find($query_yundian_code);
+                        $yundian_kefu_code = empty($result_yundian["yundian_kefu_code"])?-1:$result_yundian["yundian_kefu_code"];
+                        $yuandian_user_id = $result_yundian["user_id"];
+                    ?>
+                <div class="item1 collect_1" id="item1-cell1 collect_1" onclick="yundian_code('<?=$yundian_kefu_code;?>')">
+                    <div class="shangpin-footer-item1-row1">
+                        <img src="./images/goods_image/yundian_kefu.png">
+                    </div>
+                    <div class="shangpin-footer-item1-row2">
+                        <span>客服</span>
+                    </div>
+                </div>
+
+                <?php } else{ ?>
+                <div class="item1 collect_1" id="item1-cell1 collect_1" onclick="collect(<?= $pid . ",1,'add'," . $is_supply_id; ?>)" style="<?= $rcount > 0 ? 'display:none;':''; ?>">
+                    <div class="shangpin-footer-item1-row1">
+                        <img src="./images/goods_image/2016042701.png">
+                    </div>
+                    <div class="shangpin-footer-item1-row2">
+                        <span>收藏</span>
+                    </div>
+                </div>
+                <div class="item1 collect_2" id="item1-cell1 collect_2" onclick="collect(<?= $pid . ",1,'del'," . $is_supply_id; ?>)" style="<?= $rcount <= 0 ? 'display:none;':''; ?>">
+                    <div class="shangpin-footer-item1-row1">
+                        <img src="./images/goods_image/collect.png">
+                    </div>
+                    <div class="shangpin-footer-item1-row2">
+                        <span style="color:#ff8430">已收藏</span>
+                    </div>
+                </div>
+                <?php //当产品属于品牌供应商才能进店
+                $supply_url = "";
+                if ($isbrand_supply) {
+                    $supply_url = "./my_store/my_store.php?supplier_id=" . $is_supply_id . "&customer_id=" . $customer_id_en; ?>
+                    <div class="item1 button buttonclick">
+                        <a href="<?= $supply_url; ?>">
+                            <div class="shangpin-footer-item1-row1">
+                                <img src="./images/goods_image/2016042702.png">
+                            </div>
+                            <div class="shangpin-footer-item1-row2 pt1">
+                                <span>进店</span>
+                            </div>
+                        </a>
+                    </div>
+                <?php } ?>
+                <?php }?>
+                <div class="item1 button buttonclick">
+                    <a href="order_cart.php?customer_id=<?= $customer_id_en; ?>&shop_id=<?= $o_shop_id; ?>&yundian=<?= $yundian; ?>">
+                        <div class="shangpin-footer-item1-row3">
+                            <img src="./images/goods_image/2016042703.png">
+                            <span id="badge-span" style=""></span>
+                        </div>
+                        <div class="shangpin-footer-item1-row2 pt1">
+                            <span>购物车</span>
+                        </div>
+                    </a>
+                </div>
+                <?php if($yundian == $pro_yundian_id && $yundian != -1 && $yuandian_user_id == $user_id){?> 
+                     <div class="item2">
+                            <div  style="display: block;margin-top:10px;text-align:center;">
+                                <button id = "joinCar"  class=" disable1 am-btn  item2-panel-button" style="background-color: #D7D7D7;cursor: auto;color:#666;border: none;font-weight: 600; margin-left: -35px" disabled="disabled">自营无法购买</button>
+                            </div>
+                    </div>
+                <?php }else if($yundian == $pro_yundian_id && $yundian != -1 && $yundian_isvalid == false){?>   
+                      <div class="item2">
+                            <div  style="display: block;margin-top:10px;text-align:center;">
+                                <button id = "joinCar"  class=" disable1 am-btn  item2-panel-button" style="background-color: #D7D7D7;cursor: auto;color:#666;border: none;font-weight: 600; margin-left: -35px" disabled="disabled">已失效，无法购买</button>
+                            </div>
+                    </div>
+                <?php }else {?>
+                    <?php if ($isout == 0) { ?>
+                        <?php if ($is_allow_buy == 1) { ?>
+                            <div class="item2" <?php if (!$isbrand_supply) echo 'style="padding-left: 95px;"'; ?>>
+                                <div class="item2-panel">
+                                    <?php if ($is_virtual > 0 || $islimit > 0) {    //虚拟产品不能加入购物车?>
+
+                                        <?php if ($is_buy_sale_model == 1) {  //是否是买卖模式，0：默认模式，1：买卖模式?>
+                                            <button id="joinCar" onclick="showBuyDiv(1,1);" type="button" class="am-btn am-btn-warning item2-panel-button skin-b1"
+                                                    disabled="disabled">买</button>
+                                        <?php } else { ?>
+                                            <button id = "button4" onclick="showlevel(<?= $is_allow_buy;?>);showBuyDiv(1,1);" type="button" class="skin-b1 am-btn am-btn-warning item2-panel-button text-hidden" disabled="disabled">加入购物车</button>
+                                        <?php } ?>
+                                    <?php } else { ?>
+                                        <?php if ($is_supply_id < 0) { ?>
+                                            <?php if ($is_buy_sale_model == 1) { ?>
+                                                <button id="joinCar" onclick="showBuyDiv(1,1);" type="button"
+                                                        class="skin-b1 am-btn am-btn-warning item2-panel-button" disabled="disabled">买</button>
+                                            <?php } else { ?>
+                                                <button id="joinCar" onclick="showBuyDiv(1);" type="button" class="skin-b1 am-btn am-btn-warning item2-panel-button"
+                                                        disabled="disabled">加入购物车</button>
+                                            <?php } ?>
+                                        <?php } else {
+                                            if ($is_supply_id > 0 && 1 == $is_admin_closed && 1 == $is_owner_closed) { ?>
+                                                <?php if ($is_buy_sale_model == 1) { ?>
+                                                    <button id="joinCar" onclick="showBuyDiv(1,1);" type="button"
+                                                            class="skin-b1 am-btn am-btn-warning item2-panel-button" disabled="disabled">买</button>
+                                                <?php } else { ?>
+                                                    <button id="joinCar" onclick="showBuyDiv(1);" type="button"
+                                                            class="skin-b1 am-btn am-btn-warning item2-panel-button" disabled="disabled">加入购物车</button>
+                                                <?php } ?>
+
+                                            <?php } else {
+                                                if ($is_supply_id > 0 && (0 == $is_admin_closed || 0 == $is_owner_closed)) { ?>
+                                                    <?php if ($is_buy_sale_model == 1) { ?>
+                                                        <button id="button4" onclick="alert('商家不在营业时间内')" type="button"
+                                                                class="skin-b1 am-btn am-btn-warning item2-panel-button text-hidden" disabled="disabled">买</button>
+                                                    <?php } else { ?>
+                                                        <button id="button4" onclick="showlevel(<?= $is_allow_buy; ?>);showBuyDiv(1,1);" type="button"
+                                                                class="skin-b1 am-btn am-btn-warning item2-panel-button text-hidden" disabled="disabled">加入购物车</button>
+                                                    <?php } ?>
+                                                <?php }
+                                            }
+                                        } ?>
+                                    <?php } ?>
+                                </div>
+                                <div class="item2-panel">
+                                    <?php if ($is_supply_id < 0): ?>
+                                        <?php if ($is_buy_sale_model == 1): ?>
+                                            <?php if ($is_promoters == 1): ?>
+                                                <button id="sellDiv" onclick="showsellDiv(2);" type="button"
+                                                        class="skin-b2 am-btn  am-btn-danger item2-panel-button" disabled="disabled">卖</button>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <button id="buyDiv" onclick="showBuyDiv(2);" type="button" class="skin-b2 am-btn  am-btn-danger item2-panel-button"
+                                                    disabled="disabled">立即购买</button>
+                                        <?php endif;  ?>
+                                    <?php else: ?>
+                                        <?php if ($is_supply_id > 0 && 1 == $is_admin_closed && 1 == $is_owner_closed):  ?>
+                                            <?php if ($is_buy_sale_model == 1): ?>
+                                                <?php if ($is_promoters == 1): ?>
+                                                    <button id="sellDiv" onclick="showsellDiv(2);" type="button"
+                                                            class="skin-b2 am-btn  am-btn-danger item2-panel-button" disabled="disabled">卖</button>
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                <button id="buyDiv" onclick="showBuyDiv(2);" type="button" class="skin-b2 am-btn  am-btn-danger item2-panel-button"
+                                                        disabled="disabled">立即购买</button>
+                                            <?php endif; ?>
+                                        <?php else:
+                                            $PDM->console_js("sid:".$is_supply_id."is_admin_closed:".$is_admin_closed."is_owner_closed:".$is_owner_closed);
+                                            ?>
+                                            <?php if ($is_supply_id > 0 && (0 == $is_admin_closed || 0 == $is_owner_closed)): ?>
+                                            <?php if ($is_buy_sale_model == 1): ?>
+                                                <?php if ($is_promoters == 1): ?>
+                                                    <button id="sellDiv" onclick="showsellDiv(2);" type="button"
+                                                            class="skin-b2 am-btn  am-btn-danger item2-panel-button" disabled="disabled">卖</button>
+                                                <?php endif; ?>
+                                            <?php else: ?>
+                                                <button id="button3" onclick="alert('商家不在营业时间内')" type="button"
+                                                        class="skin-b2 am-btn  am-btn-danger item2-panel-button text-hidden"
+                                                    <?= $issnapup ? "disabled='disabled'" :""?>>商家休息中</button>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="item2">
+                                <!-- <div class="item2-panel">
+                                    <button style="width:170%;height:40px;background-color:#ccc;border:1px solid #ccc;color:#666;font-size:14.33px;" type="button" class="skin-b2 am-btn am-btn-warning item2-panel-button">您没有权限购买此产品</button>
+                                </div> -->
+                                <div  style="display: block;margin-top:10px;text-align:center;">
+                                    <button id = "joinCar"  class=" disable1 am-btn  item2-panel-button" style="background-color: #D7D7D7;cursor: auto;color:#666;border: none;font-weight: 600; margin-left: -35px" disabled="disabled">您没有权限购买此产品</button>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <div class="item2" <?= !$isbrand_supply ? 'style="padding-left: 95px;"' : ""; ?>>
+                            <div class="item2-panel">
+                                <button id="joinCar" class=" disable1 am-btn  item2-panel-button"
+                                        style="background-color: #D7D7D7;cursor: auto;color:#666;border: none;font-weight: 600;" disabled="disabled">立即购买</button>
+                            </div>
+                            <div class="item2-panel">
+                                <button id="joinCar" class=" am-btn  item2-panel-button"
+                                        style="background-color: #D7D7D7;cursor: auto;color:#666;border: none;font-weight: 600;" disabled="disabled">加入购物车</button>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php }?>
+            </div>
+        <?php } ?>
+        <div class="helper"><div class="forward"></div></div>
+        <!-- dialog -->
+        <div class="am-share shangpin-dialog" style="z-index:4999;">
+            <div class="content-base  row1">
+                <div class="dlg-row1-cell0"><img class="am-img-thumbnail am-circle" onclick="closeDialog();" src="./images/goods_image/2016042704.png"></div>
+            </div>
+            <!-- 加入购买 -->
+            <div class="content-base dialog-content">
+                <div class="content-base content-row1">
+                    <div class="dlg-content-row1-left" id="Preview" value="0">
+                        <img src="<?= $default_imgurl; ?>?x-oss-process=image/resize,w_200">
+                    </div>
+                    <div class="dlg-content-row1-right">
+                        <div class="dlg-content-row1-right-top1"><span><?= $prodcut_name; ?></span></div>
+                        <div class="dlg-content-row1-right-top2">
+                            <span>
+                                <?= $oof_before; ?>
+                                <span id="now_price">
+                                <?php
+                                $integral_now_price = 0;
+                                /**************pine*************/
+                                 if($checkIsPromoter==1){
+                                   echo number_format($p_vip_price, 2);
+                             }else{ 
+                                    if ($integral_type == 2 && $integral_result['errcode'] == 0 && $integral_result['data'][$pid]['integral_p'] > 0) {  //积分兑换价格
+                                    $integral_now_price = number_format($integral_result['data'][$pid]['money_p'], 2);
+                                    echo number_format($integral_result['data'][$pid]['money_p'], 2);
+                                    } else {
+                                        echo number_format($p_now_price, 2);
+                                    }    
+                                }
+                               /************pine**************************/
+                                
+                                ?>
+                                </span>
+                                <?= $oof_after; ?>
+                            </span>
+                            <span class="sign_add" style="color:#000;">+</span>
+                            <span class="need_score_span dlg-content-row1-right-top2-span">
+                                <span id="need_score"><?= $p_need_score; ?></span>积分
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ov-class pros-box">
+                    <?php
+                    foreach ($proids_arr as $k => $v) {
+                        if ($k == ""){
+                            continue;
+                        }
+                        $subids = "";
+                        $parent_attr_img = "";
+                        if ($proids_arr[$k]["parent_attr_img"]){
+                            $parent_attr_img = "parent_attr_img";
+                        }
+                        echo '<div id="pro_' . $k . '" class="pro_div '.$parent_attr_img.'">';
+                        echo '<div class="big_pro_name">';
+                        echo '      <span>' . $v["name"] . ':&nbsp;&nbsp;</span>';
+                        echo '</div>';
+                        echo '<div pos_name="' . $v["name"] . '" class="small_pro_div">';
+                        foreach ($v["data"] as $kk => $vv) {
+                            $pos_num = "";
+                            $wholesale_div = "";
+                            if (($is_wholesale == 1 && $vv["wholesale_num"] >= 1 && $restricted_isout != 1 && $islimit != 1) ||($quantity_purchased == -1 && $purchase_times == -1 && $islimit != 1)){         //限购活动优先于批发属性  creat by hzq
+                                $pos_num = " pos_num='{$vv['wholesale_num']}'";
+                                $wholesale_div = " wholesale_div";
+                            }
+                            echo '<div pos_id="'.$kk.'" attr_index="'.$vv["index"].'" class="pos_'.$k.$wholesale_div.' pos_div pt_pros_div pos_'.$kk.' " onclick="chooseDiv('.$k.','.$kk.');" id="pro_div_'.$k.'_'.$kk.'" attr_img="'.$vv["img"].'"'.$pos_num.">";
+                            echo '<span class="span_pos_'.$k.'">'.$vv["name"].'</span>';
+                            echo '</div>';
+                            $subids .= "_".$kk;
+                        };
+                        $subids = substr($subids, 1);
+                        echo '<input name="prvalues" id="invalue_'.$k.'" value="" type="hidden">';
+                        echo '<script>selproHash.add("'.$k.'","'.$subids.'");</script>';
+                        echo '</div>';
+                        echo '<input type="hidden" name="wholesale_num" id="wholesale_num" value="1">';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+                <div id="numDiv" class="content-base content-row4">
+                    <span class="dlg-content-row4-span">数量:&nbsp;&nbsp;</span>
+                    <div class="num_div">
+                        <div class="minus button buttonclick" onclick="minusNum();"><span>-</span></div>
+                        <div class="count_div">
+                            <!-- <span id = "mount_count">3</span> -->
+                            <input onblur="modify();" type="text" value="1" id="mount_count" autocomplete="off" onkeyup="clearNoNum(this)"
+                                   onafterpaste="clearNoNum(this)">
+                        </div>
+                        <div class="add button buttonclick" onclick="addNum();"><span>+</span></div>
+                    </div>
+                    <div id="stock_div">
+                        库存:
+                        <span id="stock">
+
+                        <!-- <?php
+                        if ($integral_type == 2 && $integral_result['errcode'] == 0 && $integral_result['data'][$pid]['stock'] > 0) {
+                            echo $integral_result['data'][$pid]['stock'];
+                        }else{
+                            echo $p_storenum;
+                        }
+                        ?> -->
+                            <?= $p_storenum; ?>
+                    </span>
+                    </div>
+                </div>
+                <!-- 加入购买 -->
+                <div class="div-clear"></div>
+                <div class="content-button" id="div_joinCar">
+                    <?php if ($is_virtual > 0 || $islimit > 0):    //虚拟产品不能加入购物车?>
+                        <button id="another_joinCar" onclick="showlevel(<?= $is_allow_buy; ?>);addToCart();" type="button" class="am-btn am-btn-warning text-hidden"
+                                disabled="disabled">加入购物车
+                        </button>
+                    <?php else: ?>
+                        <button id="another_joinCar" type="button" onclick="addToCart();" class="am-btn am-btn-warning" disabled="disabled">加入购物车</button>
+                    <?php endif; ?>
+                </div>
+                <?php if ($is_collage_product == 1): ?>
+                    <div class="content-button" id="div_buyNow">
+                        <button id="collage_buyNow" type="button" onclick="buyGood();" class="am-btn am-btn-danger">立即购买</button>
+                    </div>
+                <?php else: ?>
+                    <div class="content-button" id="div_buyNow">
+                        <button id="another_buyNow" type="button" onclick="buyGood();" class="am-btn am-btn-danger" disabled="disabled">立即购买</button>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <!-- dialog -->
+        </div>
+        <!-- dialog1 -->
+        <div id="qrcode_div">
+            <div id="close_qr"  onclick="close_code();">
+                <img src="images/info_image/btn_close.png" width="30">
+            </div>
+            <div id="code_img">
+                <i class="wx_loading_icon"></i>
+            </div>
+            <div id="refresh_qr">
+                <div class="refresh">
+                    <span>长按图片保存二维码</span>
+                    <img onclick="get_qrcode();" src="images/info_image/refresh.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="qrcode_div_bg">
+            <div class="qrcode_div_bg_w">
+                <div id="close_qr" class="close_yunduan"  onclick="close_yundian_code();">
+                    <img src="images/info_image/btn_close.png" width="30">
+                </div>
+                <div id="code_img1" class="ewm-img">
+                    <i class="wx_loading_icon"></i>
+                </div>
+                <div id="refresh_qr1">
+                    <div class="refresh1">
+                        <span>扫一扫加店主进行咨询 !</span>
+                    </div>
+                    
+                </div>
+            </div>
+         </div>
+
+        <div id="coupon_div" style="display: none;">
+            <div id="close_coupon" onclick="close_coupon();" style="padding-right: 41px; display: block;">
+                <img src="images/info_image/btn_close.png" width="30">
+            </div>
+            <div class="box_div">
+                <div class="coupon_font">可领取1优惠券</div>
+                <div class="coupon_overflow">
+                    <?php
+                    $nowtime = date('Y/m/d', time());                //优惠劵开始时间
+                    foreach ($coupon_array as $k => $v){
+                        $coupon_id = $v["id"];
+                        $coupon_title = $v["title"];
+                        $NeedMoney = $v["NeedMoney"];
+                        $MaxMoney = $v["MaxMoney"];        //这里作为单品优惠劵的固定优惠金额
+                        $CanGetNum = $v["CanGetNum"];
+                        $MoneyType = $v["MoneyType"];
+                        $user_scene = $v["user_scene"];
+                        $DaysType = $v["DaysType"];        //截止时间类型 0:截止天数,1:截止日期
+                        $class_type = $v["class_type"];
+                        $startline = $v["startline"];        //使用开始时间
+                        $connected_id = $v["connected_id"];    //单品代金卷就是关联产品ID；商铺代金卷就是关联供应商ID
+                        $coupon_isvalid = $v["coupon_isvalid"];                    //是否有效
+                        $remark = $v["remark"];
+                        $nowtime = $v["nowtime"];
+                        $endtime = $v["endtime"];
+
+                        if (($is_collage_from == 1 || ($is_collage_from == 0 && $v["class_type"] != 3)) && $v["coupon_isvalid"] == true){ ?>
+                            <div class="box">
+                                <div class="bottomdiv " style="background-color:<?=$v["user_scene"] == 0 ? "#ff675f":"";?>" onclick="get_coupon(<?= $coupon_id . "," . $pid; ?>)">
+                                    <div class="tag_new tag orange" <?= $v["user_scene"] == 0 ? ' style="background-color:#F44A4A;color:#A81616;"':"";?>>
+                                        <?= $v["user_scene"] == 0 ? "平台":"商品" ?>专用券
+                                    </div>
+                                    <div class="leftdiv " style="background-color:<?= $v["user_scene"] == 0 ? "#ff675f":""; ?>">
+                                        <div class="topp">有效期:<span><?= $v["nowtime"]; ?>--<?= $v["endtime"]; ?></span></div>
+                                        <div class="botdiv">
+                                            <div class="botleft">
+                                                <span class="coupon_absolute">
+                                                <?php if ($v["class_type"] != 3) { ?>
+                                                    <span class="five_font orangefive"><?= $v["MaxMoney"]; ?></span><?= OOF_T ?>
+                                                <?php } else { ?>
+                                                    【免单】
+                                                <?php } ?>
+                                                </span>
+                                            </div>
+                                            <div class="botright">
+                                                <div class="ptwo">备注：<span><?= $v["remark"]; ?></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="rightdiv" <?= $v["user_scene"] == 0 ? 'style="background-color:#F44A4A"' : ""; ?>>
+                                        <?php if ($v["NeedMoney"] >= 0){ ?>
+                                            <div class="lineone">满<span class="cont"><?= $v["NeedMoney"]; ?></span><?= OOF_T ?></div>
+                                        <?php }else{ ?>
+                                            <div class="lineone">不限金额</div>
+                                        <?php } ?>
+                                        <div class="lineone">即可使用</div>
+                                        <div class="linetwo">(不含邮费)</div>&gt;
+                                        <div class="linethree red" <?= $v["user_scene"] == 0 ? 'style="color:#ff675f;"' : "";?>>立即领取</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } ?>
+                </div>
+            </div>
+        </div>
+        <div id="screen" onclick="close_coupon();"></div>
+        <input type="hidden" id="supply_id" value="<?= $is_supply_id; ?>"/>
+        <input type="hidden" id="pid" value="<?= $pid; ?>"/>
+        <input type="hidden" id="topic_id" value="<?= $topic_id; ?>"/>
+        <input type="hidden" id="resource_id" value="<?= $resource_id; ?>"/>
+    </div>
+</body>
+<!-- 页联系js -->
+<script type="text/javascript" src="./js/ImgPreview.js"></script>
+<script type="text/javascript" src="./js/swiper.min.js"></script>
+<script type="text/javascript" src="./assets/js/amazeui.js"></script>
+<script type="text/javascript" src="./js/global.js?ver=<?= JSVER ?>"></script>
+<script type="text/javascript" src="./js/loading.js"></script>
+<!-- <script type="text/javascript" src="./js/data.js"></script> -->
+<script type="text/javascript" src="./js/region_select.js"></script>
+<script src="./js/goods/mobiscroll/mobiscroll.custom-2.17.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/weixinpl/common/js/jquery.lazyload.js"></script>
+<script src="/shop/Public/Default/Home/js/cart_function_h5.js"></script>
+<script type="text/javascript">
+    $(".shangpin-second2").find('table').css("width","");
+    $(".shangpin-second2").find('table').attr("width","");
+    var count_commodity = '<?= $count_commodity?>'
+    var is_allow_buy = "<?= $is_allow_buy; ?>";
+    var from_type = "<?= $from_type; ?>";
+    var pid = "<?= $pid; ?>";
+    var customer_id = '<?= $customer_id_en; ?>';
+    var customer_id2 = '<?= $customer_id; ?>';
+    var user_id = '<?= $user_id; ?>';
+    var owner_id = '<?= $owner_id; ?>';
+    var supply_id = '<?= $is_supply_id; ?>';
+    var pro_act_type = '<?= $pro_act_type; ?>';     //产品活动类型，22积分兑换产品
+
+    var sid = '<?= $is_supply_id; ?>';
+    var need_integral = '<?= $integral_result['data'][$pid]['integral_p'];?>';       //兑换产品需要的商城积分
+    var need_store_integral = '<?= $integral_result['data'][$pid]['store_integral_p'];?>';//兑换产品需要的门店积分
+    var user_integral = '<?= $user_integral;?>';        //用户商城积分
+    var user_store_integral = '<?= $user_store_integral;?>';    //用户门店积分
+    var shop_integral_onoff = '<?= $shop_integral_onoff;?>';        //商城积分开关
+    var store_integral_onoff = '<?= $store_integral_onoff;?>';  //门店积分开关
+    console.log(store_integral_onoff);
+    console.log(shop_integral_onoff);
+    var buystart_time = '<?= strtotime($istart_time);?>';
+    var buyend_time = '<?= strtotime($iend_time);?>';
+
+    var vp_val = '<?= $vp_val;?>';
+    var isvp = '<?= $isvp;?>';
+    var vp_score = '<?= $vp_score;?>';
+
+    var buystart_time_format = '<?= date('Y/m/d', strtotime($istart_time));?>';
+    var buyend_time_format = '<?= date('Y/m/d', strtotime($iend_time));?>';
+    var runtimes = 0;
+    var product_vedio = '<?= $product_vedio;?>';
+    var product_voice = '<?= $product_voice;?>';
+    var w_heigjt = $(window).height();//屏幕高度
+    var w_width = $(window).width();//屏幕宽度度
+    var default_pids = "<?= $default_pids; ?>";
+    var p_now_price = "<?= $p_now_price; ?>";//现价
+    var integral_now_price = "<?= $integral_now_price; ?>";//积分兑换产品现价
+    var for_price = "<?= $for_price; ?>";//成本价
+    var cost_price = "<?= $cost_price; ?>";//供货价
+    var p_need_score = "<?= $p_need_score; ?>";//需要的积分
+    var p_storenum = "<?= $p_storenum; ?>";//库存
+    var isout = "<?= $isout; ?>";//是否下架
+    var issnapup = "<?= $issnapup; ?>";//抢购产品
+    var is_stockOut = '<?= $is_stockOut; ?>';//库存不足下架开关
+    var pro_card_level_id = '<?= $pro_card_level_id; ?>';   //购买产品需要会员卡的等级
+    var pro_card_level = '<?= $pro_card_level; ?>'; //购买产品需要会员卡等级开关
+    var shop_card_id = '<?= $shop_card_id; ?>'; //分销会员卡id
+    var pis_identity = '<?= $pis_identity; ?>'; //产品是否需要身份证购买
+    var is_identity = '<?= $is_identity; ?>';   //是否开启身份证验证
+    var is_QR = '<?= $is_QR; ?>';   //是否 二维码产品 0:否 1:是
+    var is_virtual = '<?= $is_virtual; ?>'; //是否为虚拟产品 0:非虚拟产品,1:虚拟产品
+    var is_showdiscuss = '<?= $is_showdiscuss; ?>';
+    var isvalid = '<?= $isvalid; ?>';
+    var is_promoters = '<?= $is_promoters; ?>'; //是否是推广员
+    var Plevel = '<?= $Plevel; ?>'; //推广员等级
+    var issell_model = '<?= $issell_model; ?>'; //复购开关
+    var init_reward = '<?= $init_reward; ?>';   //商城分佣比例
+    var pro_reward = '<?= $pro_reward; ?>'; //产品分佣比例
+    var is_product_shuf = '<?= $is_product_shuf;?>';    //是否自动轮播 0否，1是
+    var is_show_original = '<?= $is_show_original;?>';  //是否显示原价 0否，1是
+    var islimit = '<?= $islimit;?>';    //是否限购 0否，1是
+    var limit_num = '<?= $limit_num;?>';    //限购数量
+    var is_consume = '<?= $is_consume; ?>'; //是否满足消费无限级奖励/股东分红 0:普通推广员 1:代理 2:渠道 3:总代理 4:股东
+    var tax_type = "<?= $tax_type;?>";
+    var check_first_extend = '<?= $check_first_extend;?>';//是否符合首次推广奖励
+    var is_collage_product = '<?= $is_collage_product;?>';  //拼团产品标识，1：是，0否
+    var singlePrice = '<?= $singlePrice;?>';            //单独购买价格
+    var groupPrice = '<?= $groupPrice;?>';          //团购价
+    var groupStock = '<?= $groupStock;?>';          //团购库存
+    var groupBuyType = 1;                   //判断单独购买还是团购，1单独购买，2团购
+    var activitie_id = '<?= isset($collage_product_info['activitie_id'])?$collage_product_info['activitie_id']:-1?>';   //团活动id
+    console.log("from_type:"+from_type);
+    console.log(pro_card_level_id);
+    console.log(shop_card_id);
+    if (pro_act_type != 22) {
+        var collage_start_time = '<?= isset($collage_product_info['start_time'])?strtotime($collage_product_info['start_time']):'';?>'; //活动开始时间
+        var collage_end_time = '<?= isset($collage_product_info['end_time'])?strtotime($collage_product_info['end_time']):'';?>';       //活动结束时间
+
+    } else {
+        var collage_start_time = '<?= strtotime($integrl_start_time);?>';
+        var collage_end_time = '<?= strtotime($integrl_end_time);?>';
+
+    }
+    var is_stockOut_bak = '<?= $is_stockOut; ?>';       //库存不足下架开关
+    var pro_card_level_bak = '<?= $pro_card_level; ?>'; //购买产品需要会员卡等级开关
+    var is_wholesale = "<?= $is_wholesale; ?>";//是否拥有批发属性
+    var g_app_type = "<?= $g_app_type;?>";  //app类型
+    var is_aog = parseInt('<?= $is_aog;?>');        //是否预到货产品
+    var delivery_id = '<?= $delivery_id;?>';    //预配送时间设置id
+    var delivery_name = '<?= $delivery_name;?>';    //预配送活动名
+    var is_buy_sale_model = '<?= $is_buy_sale_model;?>';    //是否是买卖模式，0：默认模式，1：买卖模式
+    var integral_type = '<?= $integral_type; ?>';       //是否积分兑换产品，1否，2是
+    var pro_act_id = '<?= $pro_act_id; ?>';     //活动id
+    var restricted_isout = '<?= $restricted_isout; ?>';         //新限购活动状态
+    var buy_times = '<?= $buy_times; ?>';               //用户已购买该产品次数
+    var buy_quantity = '<?= $buy_quantity; ?>';             //用户已购买该产品数量
+    var purchase_times = '<?= $purchase_times; ?>';         //新限购 限制产品购买次数
+    var quantity_purchased = '<?= $quantity_purchased; ?>'; //新限购 限制产品购买数量
+    var restricted_id = '<?= $restricted_id; ?>';
+    var restricted_product_id = '<?= $restricted_product_id; ?>';
+    var is_restricted = '<?= $is_restricted; ?>';   //是否参与限购活动
+    var active_countdown = '<?= $active_countdown; ?>'; //开始时间倒数
+    var is_display_time = '<?= $is_display_time; ?>';   //限购活动是否显示倒数
+    var display_time_count_down = '<?= $display_time_count_down; ?>';   //显示时间倒数
+    var display_time_range = '<?= $display_time_range; ?>';             //显示范围
+
+    var default_imgurl = '<?= $default_imgurl;  ?>';
+    var define_share_image  = "<?= $define_share_image;  ?>";//自定义分享图片
+    var attr_img_str = '<?= $attr_img_str;  ?>';    //主属性图片
+    var attr_parent_id = '<?= $attr_parent_id;?>';  //主属性父id
+    var o_shop_id = '<?= $o_shop_id; ?>'; //订货系统门店id
+    var pro_yundian_id = '<?= $pro_yundian_id; ?>'; //产品所属云店ID
+    if(pro_yundian_id == false)
+    {
+        pro_yundian_id = -1;
+    } 
+    var p_pro_str           = '<?php echo $p_pro_str;?>';           //父属性ID顺序链
+    var choose_arr          = new Array();                          //选择的属性数组  key ->pid value->id
+    if(p_pro_str.indexOf('_') != -1 ){
+        var p_pro_arr     = p_pro_str.split("_");
+    }
+    var yundian_isvalid = '<?php echo $yundian_isvalid;?>'; //云店有效性
+    var yundian = '<?php echo $yundian;?>';
+    var yundian_id = '<?php echo $yundian;?>';      //js以及后面购物车用
+    var yundian_name = '<?php echo $yundian_name;?>';//云店名称
+    debug = false;
+    share_url = "<?php echo $linkurl; ?>"; //分享链接
+    title = "<?php echo $share_title; ?>"; //标题
+    desc = '<?php echo $introduce; ?>'; //分享内容
+    if (desc.length >= 120) {
+        desc = desc.substring(0, 115) + '...';
+    }
+    <?php if(!empty($define_share_image)){ ?>
+    imgUrl = '<?= $new_baseurl.$define_share_image; ?>'; // 分享图标
+    <?php }elseif(!empty($default_imgurl)){ ?>
+    imgUrl = '<?= $new_baseurl.$default_imgurl; ?>';
+    <?php }else{ ?>
+    imgUrl = '<?= $pp_imgurl; ?>'; // 分享图标
+    <?php } ?>
+    share_type = 4;//自定义类型
+    var eva_done = 0; //评论是否加载完成
+    var dis_pagenum = 1;
+    var eva_lock = 0;//评论是否上锁
+    var PL = 0;//评论类型
+    console.log(share_url);
+    var sStr = "";//没有选择属性默认为空
+    $(function () {
+        $(".colorchange").eq(0).css("color", "#F4212B");
+        $(".colorchange").click(function () {//点击切换评论，重新加载。
+            PL = $(this).attr("PL");
+            $(this).css("color", "#F4212B").siblings().css("color", "#333333");
+            $("#thelist").html("");
+            dis_pagenum = 1;
+            eva_done = 0;
+            eva_lock = false;
+            pullUpAction(PL, dis_pagenum);
+            console.log(is_wholesale);
+        })
+
+        check_stock_change_btn(sStr);
+
+        if(yundian == pro_yundian_id && yundian != -1 && yundian_isvalid == false){
+            showAlertMsg("提示", yundian_name+'店铺产品已失效，不能进行购买', "知道了");
+        }
+    });
+
+    is_exit_localStorage(1);
+
+    //日历
+    if (delivery_id > 0) {
+        var data = JSON.parse('<?= json_encode($delivery_datetime)?>');
+        if (data.length > 0) {
+            $('.delivery_id').show();
+            //日历
+            $('.shangpin-neardate ul li').on('click', function () {
+                $(this).addClass('active').siblings().removeClass('active');
+                $('#preDeliveryDate').val($(this).attr('date'));
+                $('#preDeliveryTime').val('');
+            });
+
+            var eDate = data[data.length - 1], maxDate, Arr_data = [], Arr_all = [], Arr_between = [];
+            var today = new Date();
+            var Start = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+            //获取最后日期
+            if (eDate.style == 0) {
+                maxDate = eDate.end;
+            } else {
+                maxDate = eDate.day;
+            }
+            //所有可选日期
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].style == 0) {
+                    getAllDate(data[i].start, data[i].end, Arr_data);
+                } else {
+                    var Tdata = data[i].day.split("-");
+                    data[i].day = Tdata[0] + '-' + Tdata[1] + '-' + parseInt(Tdata[2]);
+                    Arr_data.push(data[i].day);
+                }
+            }
+            //开始与结束之间的日期
+            // getAllDate(Start,maxDate,Arr_all);
+            //不可选日期
+            var tmp = Arr_data;
+            var o = {};
+            for (var i = 0; i < tmp.length; i++) {
+                (tmp[i] in o) ? o[tmp[i]]++ : o[tmp[i]] = 1;
+            }
+            ;
+            for (x in o) {
+                Arr_between.push(x);
+            }
+            ;
+            //月份减一
+            for (var k in Arr_between) {
+                var temp = Arr_between[k].split("-");
+                Arr_between[k] = temp[0] + '-' + (temp[1] - 1) + '-' + temp[2];
+            }
+            ;
+            var max = maxDate.split("-");
+            var min = data[0]['day'].split("-");
+            var timelist = 1;//是否选择时间段
+            var isAutoShowPros = 0; //是否需要自动显示属性框
+            $('.getmovetime').mobiscroll().calendar({
+                minDate: new Date(min[0], min[1] - 1, min[2]),
+                maxDate: new Date(max[0], max[1] - 1, max[2]),//最后日期
+                theme: 'mobiscroll',
+                lang: 'zh',
+                display: 'bottom',
+                mode: 'clickpick',
+                dateFormat: 'mm-dd',
+                endYear: (new Date()).getFullYear() + 1,
+                startYear: new Date().getFullYear(),
+                onShow: function (html, inst) {
+                    $('.dw-cal-anim .dw-cal-day').each(function () {
+                        var that = $(this),
+                            time = that.data('full');
+                        if ($.inArray(time, Arr_between) == -1) {
+                            that.attr('class', 'dw-cal-day dw-cal-day-inv');
+                            return true;
+                        }
+                    })
+                },
+                onSelect: function (dateText, inst) {
+                    $('.shangpin-neardate ul li').removeClass('active');
+                    var startDate = inst.getDate();
+                    $('#preDeliveryDate').val(startDate.Format("yyyy-MM-dd"));
+                    $('#preDeliveryTime').val('');
+                    $('.showmovetime').html(startDate.Format("yyyy-MM-dd"));
+                    if (timelist == 1) {//是否选择时间段
+                        addTimeList(startDate.Format("yyyy-MM-dd"));
+                    }
+                }
+            })
+
+            function getDate(datestr) {
+                var temp = datestr.split("-");
+                var date = new Date(temp[0], temp[1], temp[2]);
+                return date;
+            }
+
+            function getAllDate(start, end, arr) {
+                var startTime = getDate(start);
+                var endTime = getDate(end);
+                while ((endTime.getTime() - startTime.getTime()) >= 0) {
+                    var year = startTime.getFullYear();
+                    var month = startTime.getMonth();
+                    var day = startTime.getDate();
+                    arr.push(year + "-" + month + "-" + day);
+                    startTime.setDate(startTime.getDate() + 1);
+                }
+            }
+
+            function addTimeList(date) {
+                var deliveryTime = [];
+                $('.showmovetime').html(date);
+                //获取时间段
+                $.ajax({
+                    url: 'get_delivery_time.php?customer_id=' + customer_id,
+                    dataType: 'json',
+                    type: 'post',
+                    async: false,
+                    data: {
+                        delivery_date: date,
+                        delivery_id: delivery_id
+                    },
+                    success: function (res) {
+                        if (res.status == 1) {
+                            deliveryTime = res.delivery_time;
+                        } else {
+                            $('#preDeliveryDate').val('');
+                            $('#preDeliveryTime').val('');
+                            $('.showmovetime').text('');
+                            $('.showmovelist').text('');
+                            $('.shangpin-neardate ul li').removeClass('active');
+                            alertAutoClose(res.msg);
+                        }
+                    },
+                    error: function (err) {
+
+                    }
+                })
+                if (deliveryTime.length > 0) {
+                    var str = '<div class="Timelist-bg"></div><div class="Timelist">';
+                    str += '<div class="Time-title">请选择时间段</div>';
+                    str += '<div class="Time-content"><ul>';
+                    for (var i in deliveryTime) {
+                        str += '<li>' + deliveryTime[i] + '</li>';
+                    }
+                    str += '<ul></div>';
+                    str += '<div class="Time-button"><button class="Time-true">确定</button><button class="Time-false">取消</button></div>';
+                    str += '</div>';
+                    $('body').append(str);
+                    $('.Time-content ul li').eq(0).addClass('skin-color');
+                    var winheight = $('.Timelist').height();
+                    $('.Timelist').css('margin-top', -winheight / 2);
+                    $('.Time-content li').on('click', function () {
+                        $(this).addClass('skin-color').siblings().removeClass('skin-color');
+                    });
+                    $('.Time-true').on('click', function () {
+                        var active = $('.Time-content li.skin-color').text();
+                        $('.showmovelist').html(active);
+                        $('#preDeliveryTime').val(active);
+                        $('.Timelist,.Timelist-bg').remove();
+                        if (isAutoShowPros) {
+                            if (is_buy_sale_model) {
+                                if(is_collage_product){
+                                    showBuyDiv(2, 0);
+                                }else{
+                                    showBuyDiv(1, 1);
+                                }
+                            } else {
+                                showBuyDiv(2, 0);
+                            }
+                            isAutoShowPros = 0;
+                        }
+                    });
+                    $('.Time-false').on('click', function () {
+                        $('.Timelist,.Timelist-bg').remove();
+                    });
+                    $('.Timelist-bg').on('click', function () {
+                        $('.Timelist,.Timelist-bg').remove();
+                    });
+                }
+
+            }
+        } else {
+            // delivery_id = -1;
+            // $('.delivery_id').remove();
+            var html_dedelivery = '';
+            html_dedelivery += '<div  style="display: block;margin-top:10px;text-align:center;">';
+            html_dedelivery +='<button id = "joinCar"  class=" disable1 am-btn  item2-panel-button" style="background-color:#D7D7D7;cursor: auto;color:#666;border: none;font-weight: 600; margin-left: -35px" disabled="disabled">该产品还没到预配送时间</button>';
+            html_dedelivery +='</div>';
+            $(".item2").html(html_dedelivery);
+        }
+    }
+
+    /*属性图预览*/
+    var Preview_data = eval(attr_img_str);
+    $('#Preview').Preview({
+        data: Preview_data, /*数据*/
+        index: $('#Preview').attr('value')/*选择的属性key*/
+    });
+
+    if (is_product_shuf == 0) { //自动轮播
+        $(".am-slider").attr("data-am-slider", "{'slideshow':false}");  //取消自动轮播
+    } else {
+        $(".am-slider").attr("data-am-slider", "{'slideshowSpeed':'3000'}");    //图片轮播的时间为3秒
+    }
+    //自动计算优惠劵的最大高度60%
+    var clientHeight = document.documentElement.clientHeight;
+    $('.coupon_overflow').css('max-height', clientHeight * 0.6);
+
+    $('.detBtn').click(function () {
+        var $obj = $(this);
+        var $src = $obj.attr("src");
+        if ($src.match("xiala_icon")) {
+            $(".detBottom").fadeOut(200);
+            $src = $src.replace("xiala_icon", "xiangshang_icon")
+            $obj.attr("src", $src);
+        } else {
+            $(".detBottom").fadeIn(200);
+            $src = $src.replace("xiangshang_icon", "xiala_icon")
+            $obj.attr("src", $src);
+        }
+    })
+
+    //人气团倒计时
+    var $rest_time = $('.rest_time');
+    var remaining_time_id = new Array();
+    var currtime ;
+    var count=0;
+    if($rest_time.length > 0) {
+        $.ajax({type:"HEAD",url:'/weixinpl/mshop/ajax_get_servertime.php',complete:function(x){ currtime = new Date(x.getResponseHeader("Date")).getTime();}})//获取服务器时间
+        document.addEventListener("visibilitychange", function (e) { //解决锁屏导致倒计时不准确的bug
+             $.ajax({type:"HEAD",url:'/weixinpl/mshop/ajax_get_servertime.php',complete:function(x){ startTime = new Date(x.getResponseHeader("Date")).getTime();}})//获取服务器时间
+             count=0;
+        }, true);
+    }
+    $rest_time.each(function () {
+        var group_id = $(this).data('id');
+        var end_time = $(this).data('end_time');
+        remaining_time_id[group_id] = setInterval('group_rest_time("' + group_id + '",' + end_time + ')', 1000);
+    })
+
+    if ($rest_time.length > 0) {
+        setInterval(function () {
+        count++;
+        currtime=currtime+count*1000;
+        currtime=currtime.toString().substring(0,10);
+        }, 1000);
+    }
+
+    function group_rest_time(group_id, end_time) {
+
+        if (currtime < end_time) {
+            var resttime = end_time - currtime;
+            var nMS = resttime * 1000;
+            var nD = Math.floor(nMS / (1000 * 60 * 60 * 24));
+            var nH = Math.floor(nMS / (1000 * 60 * 60)) % 24;
+            var nM = Math.floor(nMS / (1000 * 60)) % 60;
+            var nS = Math.floor(nMS / 1000) % 60;
+            if (nH < 10) {
+                nH = '0' + nH;
+            }
+            if (nM < 10) {
+                nM = '0' + nM;
+            }
+            if (nS < 10) {
+                nS = '0' + nS;
+            }
+            if (nD > 0) {
+                $('.rest_time_' + group_id).text(nD + '天' + nH + ':' + nM + ':' + nS);
+            } else {
+                $('.rest_time_' + group_id).text(nH + ':' + nM + ':' + nS);
+            }
+        } else {
+            clearInterval('remaining_time_id[' + group_id + ']');
+            $('.rest_time_' + group_id).text('已结束！');
+        }
+        if (currtime == 0) {    //没有网络的情况下无法获取当前时间
+            // clearInterval('remaining_time_id['+group_id+']');
+            $('.rest_time_' + group_id).text("您的网络异常");
+        }
+    }
+
+    //清除选择的属性
+    function removeActive() {
+        var $active = $('.pos_div');
+        $active.each(function () {
+            if ($(this).hasClass('active')) {
+                $(this).click();
+            }
+        });
+    }
+
+    //js控制disable，如果为0：则显示，如果为1：则隐藏
+    var issnapup = '<?= $issnapup; ?>';
+    //console.log(issnapup);
+    if (issnapup == 0) {
+        $('#buyDiv').removeAttr("disabled");
+        $('#sellDiv').removeAttr("disabled");
+        $('#joinCar').removeAttr("disabled");
+        $('#button4').removeAttr("disabled");
+        $('#singleBuy').removeAttr("disabled");
+        $('#another_joinCar').removeAttr("disabled");
+        $('#another_buyNow').removeAttr("disabled");
+        $(".disable1").attr('disabled', true);
+    }
+
+    function refresh2(op) {
+        $("#qr").html('<i class="wx_loading_icon"></i>');
+        var customer_id = "<?= $customer_id;?>";
+        var user_id = "<?= $user_id;?>";
+        result_type = true;
+        $.ajax({
+            type: "post",
+            url: "../common_shop/common/tc_erweima/tc_erweima.php",
+            dataType: 'json',
+            // async:false,
+            data: {
+                customer_id: customer_id,
+                user_id: user_id,
+                op: op
+
+            },
+            success: function (result) {
+                switch (result.type) {
+                    case 1:
+                        $(".am-modal-dialog").html('<img src="' + result.exp_map_url + '">');
+                        var mh = $(window).height() * 0.85;
+                        $('.am-modal-dialog').find('img').css('maxHeight', mh);
+                        $('.wx_loading_icon').hide();
+                        break;
+                    case 0:
+                        showAlertMsg("提示", result.remark, "确定");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    function refresh(op) {
+        if (op == "reflesh") {
+            $("#qr").html('');
+            $("#qr").html('<i class="wx_loading_icon"></i>');
+            console.log($("#qr").html())
+        }
+        var customer_id = "<?= $customer_id;?>";
+        var user_id = "<?= $user_id;?>";
+        result_type = true;
+        $.ajax({
+            type: "post",
+            url: "/weixinpl/common_shop/common/tc_erweima/tc_erweima.php",
+            dataType: 'json',
+            data: {
+                customer_id: customer_id,
+                user_id: user_id,
+                op: op
+
+            },
+            success: function (result) {
+                switch (result.type) {
+                    case 1:
+                        if (result.exp_map_url) {
+                            var img_src='<?="//".$_SERVER['HTTP_HOST']."/weixinpl/common_shop/common/tc_erweima/tc_erweima_mini_h5.php?customer_id=".$customer_id."&user_id=".$user_id."&op=reflesh"?>';
+                            function ready() {
+                                if(window.__wxjs_environment == 'miniprogram'){
+                                    result.exp_map_url = img_src;
+                                    $(".am-modal-dialog").html('<img src="' + result.exp_map_url + '">');
+                                }
+                             }
+                            if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
+                                    document.addEventListener('WeixinJSBridgeReady', ready, false)
+                                    $(".am-modal-dialog").html('<img src="' + result.exp_map_url + '">');
+                                } else {
+                                    ready();
+                                }
+                        }
+                        var mh = $(window).height() * 0.85;
+                        $('.am-modal-dialog').find('img').css('maxHeight', mh);
+                        $('.wx_loading_icon').hide();
+                        result_type = true;
+                        break;
+                    case 0:
+                        showAlertMsg("提示", result.remark, "确定");
+                        result_type = false;
+                        break;
+                    default:
+                        result_type = false;
+                        break;
+                }
+            }
+
+        });
+        return result_type;
+    }
+
+    function changeAddress() {
+        $('#WSY_provinces').val(aog_p);
+        $('#WSY_provinces').change();
+        $('#WSY_city').val(aog_c);
+        $('#WSY_city').change();
+        $('#WSY_area').val(aog_a);
+        $('#WSY_area').change();
+        $('#WSY_Street').val(aog_d);
+        $('.changeAddress,.Address-box').show();
+    }
+
+    function offAddress() {
+        $('.changeAddress,.Address-box').hide();
+    }
+
+    function up_Address() {
+        aog_p = $('#WSY_provinces').val();
+        aog_c = $('#WSY_city').val();
+        aog_a = $('#WSY_area').val();
+        aog_d = $('#WSY_Street').val();
+        if (aog_p == '') {
+            alertAutoClose('请选择省份！');
+            return;
+        }
+        aog_p = aog_p ? aog_p : '';
+        aog_c = aog_c ? aog_c : '';
+        aog_a = aog_a ? aog_a : '';
+        aog_d = aog_d ? aog_d : '';
+        $('.aog_address').text(aog_p + aog_c + aog_a + aog_d);
+        check_aog();
+        offAddress();
+    }
+
+    function ctrl_address(add_data, provinces_id, city_id, area_id, default_p, default_c, default_a) {
+        console.log(add_data.length);
+        var num = add_data.length;//获取数组长度
+        var $provinces = $("#" + provinces_id);
+        var $city = $("#" + city_id);
+        var $area = $("#" + area_id);
+        (function () { //此匿名函数用于获取所有省份
+            var provinces_opt = '';
+            for (var i = 0; i < num; i++) {
+                if (add_data[i].LevelType == 1) { //LevelType==1代表省
+                    provinces_opt = '<option value=' + add_data[i].name + '>' + add_data[i].name + '</option>' + provinces_opt;
+                }
+            }
+            $provinces.append(provinces_opt);
+        })();
+        $provinces.val(default_p).attr("selected", true);//初始化省选项框
+        get_city(default_p);//根据省获取城市列表
+        $city.val(default_c).attr("selected", true);//初始化市选项框
+        get_area(default_c);//根据市获取县城列表
+        $area.val(default_a).attr("selected", true);//初始化县选项框
+        //监听省改变，则下属城市改变
+        $provinces.change(function () {
+            $city.html('<select id=' + city_id + '><option>市</option></select>');//初始化下属选项框
+            $area.html('<select id=' + area_id + '><option>县</option></select>');//同上
+            var provinces_index = this.selectedIndex;
+            var provinces_text = $(this).find("option").eq(provinces_index).text();//获取选中省名称
+            console.log(provinces_text);
+            get_city(provinces_text);
+        })
+        //监听市改变，则下属县城改变
+        $city.change(function () {
+            $area.html('<select id=' + area_id + '><option>县</option></select>');
+            var city_index = this.selectedIndex;
+            var area_text = $(this).find("option").eq(city_index).text();       //获取选中市名称
+            console.log(area_text);
+            get_area(area_text);
+        })
+
+        function get_city(provinces_name) {//此方法：根据省名称获取下属城市
+            var city_opt = '';
+            for (var i = 0; i < num; i++) {
+                if (add_data[i].LevelType == 2 && add_data[i].MergerName.match(provinces_name)) {//LevelType==2代表市
+                    city_opt = '<option value=' + add_data[i].name + '>' + add_data[i].name + '</option>' + city_opt;
+                }
+            }
+            $city.append(city_opt);
+        }
+
+        function get_area(city_name) {//此方法：根据市名称获取下属县城
+            var area_opt = '';
+            for (var i = 0; i < num; i++) {
+                if (add_data[i].LevelType == 3 && add_data[i].MergerName.match(city_name)) {//LevelType==3代表县
+                    area_opt = '<option value=' + add_data[i].name + '>' + add_data[i].name + '</option>' + area_opt;
+                }
+            }
+            $area.append(area_opt);
+        }
+    }
+
+    $(function () {
+        var sp = $('.shangpin-dialog');
+        var img = sp.find('.dlg-content-row1-left img');
+        if (img.width() < img.height()) {
+            img.parent('.dlg-content-row1-left').addClass('type2');
+        }
+    })
+    //异步加载产品图片
+    $(function() {
+        $("img[data-original]").lazyload({ effect : 'fadeIn',threshold : 500 });
+    });
+    /*3d素材*/
+    $(function(){
+        var is_show_tag_threed="<?php echo $is_show_tag_threed; ?>"
+        /*var arr=[];*/
+        var het=0;
+        var str=$('.shangpin-content-second');
+        for(var i=0;i<$('.shangpin-content-second').children().length;i++){
+            if($('.shangpin-content-second').children()[i].tagName=='IFRAME'){
+                console.log(het)
+//              if(is_show_tag_threed==1) {
+//                  str.prepend("<img src='3d_logo.png' name='lqw' style='width: 50px;height: 50px;position: absolute;top:'+het+'px;left: 0;'/>")
+//              }
+                /*arr.push(het)*/
+                het=het+207;
+            }else{
+                var het1=$(".shangpin-content-second").children().eq(i).height()
+                het=het+het1;
+                console.log(het)
+            }
+        }
+        //($('.shangpin-content-second').children()[i].tagName=='IFRAME').prepend("<img src='3d_logo.png' style='width: 50px;height: 50px;position: absolute;top:'+het+'px;left: 0;'/>");
+        if(is_show_tag_threed=='0'){
+            $(".threed_show").hide();
+        }
+    });
+ /*云店自营商品二维码开始*/
+function yundian_code(qr_code){
+    console.log();
+    if(qr_code == -1){
+        alertAutoClose("暂未开启咨询!",1000);
+/*       layer.msg('暂未开启咨询',{icon:2,time: 3000},function(){
+        });*/
+    }else{
+        
+        $(".qrcode_div_bg").css('display','block');
+        $("#qrcode_div1").slideToggle();
+        $("#screen").show();
+
+        var max_h=w_heigjt-130;
+        $("#code_img1").css("max-height",max_h+"px");
+        //get_qrcode();
+            $("#code_img1").html('<img src="'+qr_code+'">');
+            $("#code_img1 img").load(function(){
+                var img_width = $("#code_img1").width();
+                var img_m = ( w_width - img_width )/2;
+                //$("#code_img").css("left",img_m+"px");
+                var max_h=w_heigjt-130;
+                $(this).css("max-height",max_h+"px");
+               // $("#close_qr1").css("padding-right",img_m+20+"px");
+                $("#close_qr1").show();
+            })
+    }
+}
+$(function(){
+    if(yundian == pro_yundian_id && yundian != -1){
+        //同步数量
+        $("#containerDiv").on("change",'#yundian_num',function(){  
+            $('#mount_count').val($(this).val());
+            console.log('yundian_num'+$(this).val());
+        });
+        $("#containerDiv").on("change",'#mount_count',function(){  
+            $('#yundian_num').val($(this).val());
+            console.log('mount_count'+$(this).val());
+        }) 
+            $("#packUp4").click(function(){
+        $("body,html").animate({scrollTop:0},500);
+    })
+        $(window).scrollTop();
+        $(window).scroll(function(){
+            if($(window).scrollTop()>0)
+            {
+                $('#packUp4').css('display','block');
+            }
+            else{
+                $('#packUp4').css('display','none');
+            }
+        }) 
+    }
+});
+function close_yundian_code(){
+    console.log("55");
+    $(".qrcode_div_bg").hide();
+    $("#screen").hide();
+
+}
+$(".helper").click(function(){
+    $(this).hide();
+})
+</script>
+<script src="js/goods/global.js?ver=<?= JSVER ?>"></script>
+<script src="js/goods/product_detail_new.js?ver=<?= 'JSVER' ?>11"></script>
+<script src="js/goods/check_product_property.js?ver=<?= 'JSVER' ?>"></script>
+<script src="js/vue.js?ver=<?= JSVER ?>"></script>
+<!--<script src="js/goods/product_detail_new.js?ver=<?= time(); ?>"></script>-->
+<script src="js/goods/limitbuy.js"></script><!--限购方法ww-->
+<script src="js/CheckUserLogin.js?ver=<?= JSVER ?>"></script><!--检验用户是否已登录-->
+<script type="text/javascript">
+    $(function(){
+        up_Address();
+    })
+</script>
+<?php require_once('../common/share.php'); ?>
+</body>
+</html>

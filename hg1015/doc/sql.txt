@@ -1,0 +1,1 @@
+1.wsy_prod 库中 weixin_commonshop_products 和weixin_commonshop_product_prices 表中增加 vip_price字段
